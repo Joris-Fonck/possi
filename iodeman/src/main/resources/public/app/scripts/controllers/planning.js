@@ -9,7 +9,6 @@
  */
 angular.module('publicApp')
 .controller('PlanningCtrl', function ($scope, backendURL, $http, $routeParams, $timeout, Flash) {
-	
 	$scope.settings = {
             checkAll: "Selectionner toutes les salles",
             uncheckAll: "Deselectionner toutes les salles",
@@ -34,7 +33,6 @@ angular.module('publicApp')
 		});
 	});
 
-
 	$scope.showImportButton = true;
 
 	$scope.id = $routeParams.idPlanning;
@@ -44,8 +42,6 @@ angular.module('publicApp')
 
 	var inputFile = $('#upload_file');
 	var formUpload = $('#formUpload');
-
-	
 	
 	var verifyAdmin = function() {
 		if($scope.user.uid != $scope.planning.admin.uid) {
@@ -56,7 +52,7 @@ angular.module('publicApp')
 	$http.get(backendURL + 'planning/'+$scope.id+'/participants/unavailabilities')
 	.success(function(data) {
 		$scope.participants = data;
-		if($scope.participants.length>0) {
+		if($scope.participants.length > 0) {
 			$scope.showImportButton = false;
 		}
 	})
@@ -71,7 +67,7 @@ angular.module('publicApp')
 	$scope.notZeroUnaivability = function(dispoNumber) {
 		var greenStyle = "'background-color' : 'green'";
 
-		if(dispoNumber > 0){
+		if(dispoNumber > 0) {
 			return "{"+greenStyle+"}";
 		}
 
@@ -83,7 +79,6 @@ angular.module('publicApp')
 	});
 
 	$scope.validate = function() {
-		
 		$http.get(backendURL + 'planning/find/'+$scope.id).success(function(data) {
 			$scope.planning = data;
 			$scope.errorValidate = false;

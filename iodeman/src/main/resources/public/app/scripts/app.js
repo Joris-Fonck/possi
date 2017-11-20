@@ -38,11 +38,6 @@ angular.module('publicApp', [
             controller: 'CreatePlanningCtrl',
             controllerAs: 'createPlanningCtrl'
         })
-        .when('planning/create/configuration', {
-            templateUrl: 'app/views/createPlanning.html',
-            controller: 'CreatePlanningConfiguration',
-            controllerAs: 'configurationPlanningCtrl'
-        })
         .when('/planning/:idPlanning', {
             templateUrl: 'app/views/planning.html',
             controller: 'PlanningCtrl',

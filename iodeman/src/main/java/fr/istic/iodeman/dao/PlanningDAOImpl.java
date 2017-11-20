@@ -106,10 +106,10 @@ public class PlanningDAOImpl extends AbstractHibernateDAO implements PlanningDAO
 		criteria.createAlias("parts.followingTeacher", "teacher", JoinType.LEFT_OUTER_JOIN);
 		
 		criteria.add(Restrictions.or(
-				Restrictions.eq("student.uid", uid),
-				Restrictions.eq("teacher.uid", uid),
-				Restrictions.eq("adm.uid", uid)
-				));
+			Restrictions.eq("student.uid", uid),
+			Restrictions.eq("teacher.uid", uid),
+			Restrictions.eq("adm.uid", uid)
+		));
 
 		criteria.add(Restrictions.eq("is_ref", 1));
 

@@ -19,7 +19,6 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
   margin-bottom: 0px;
 }
 /* Make the masthead heading the same height as the navigation */
@@ -117,8 +116,16 @@ body {
   cursor: move;
 }
 
+.panel {
+    margin-bottom: 0px;
+}
+
 #contraintesList {
   margin: 0;
+}
+
+#contraintesList > li {
+    margin: 15px 0;
 }
 
 #contrainte-enseignants, #contrainte-tuteurs, #contrainte-horaires {
@@ -203,4 +210,8 @@ GenratedPlanning.html
 }
 .glyphicon.glyphicon-info-sign{
   font-size: 20px;
+}
+
+a, a:hover {
+  text-decoration: none;
 }
