@@ -98,21 +98,27 @@ angular.module('publicApp')
 		// period
 		if ($scope.planning.periodStart > $scope.planning.periodEnd) {
 			console.log("in");
-			$("#showErrorInfo").text("Dates de période sont incohérentes");
+			$("#showErrorInfo").text('Dates de periode sont incoherentes');
+			$scope.errorAodren = 'Dates de periode sont incoherentes';
 			validate = false; 
 		} else if ($scope.planning.dayPeriodStart >= $scope.planning.dayPeriodEnd) {
-			$("#showErrorInfo").text("Heures de début et de fin de journée incohérentes");
-			validate = false; 
+			$("#showErrorInfo").text("Heures de debut et de fin ne sont pas correctes");
+            $scope.errorAodren = 'Heures de debut et de fin ne sont pas correctes';
+
+            validate = false;
 		} else if ($scope.planning.lunchBreakStart > $scope.planning.lunchBreakStart) {
-			$("#showErrorInfo").text("Heures de repas incohérentes");
-			validate = false; 
+			$("#showErrorInfo").text("Heures de repas incorrecte");
+
+
+            validate = false;
 		} else if (
 				($scope.planning.dayPeriodStart >= $scope.planning.lunchBreakStart)
 				||
 				($scope.planning.dayPeriodEnd <= $scope.planning.lunchBreakEnd)
 		){
-			$("#showErrorInfo").text("Heures incohérentes");
-			validate = false; 
+			$("#showErrorInfo").text("Heures incoherentes");
+
+            validate = false;
 		}
 
 		// END validation
