@@ -4,6 +4,7 @@
 /.tomcatplugin
 /.classpath
 /.idea
+src/main/resources/public/bower_components/*
 
 hibernate.cfg.xml
 
