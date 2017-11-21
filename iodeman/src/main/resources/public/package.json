@@ -2,6 +2,8 @@
   "name": "public",
   "private": true,
   "devDependencies": {
-    "angular-flash-alert": "^2.0.0"
+    "angular": "1.4.9",
+    "angular-flash-alert": "2.0.0",
+    "ngstorage": "0.3.10"
   }
 }
