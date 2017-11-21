@@ -6,7 +6,8 @@
 }
 
 body {
-  padding: 0;
+    padding: 0;
+    background: #00cc99;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -130,10 +131,6 @@ body {
 
 #contrainte-enseignants, #contrainte-tuteurs, #contrainte-horaires {
   margin: 0px;
-}
-
-body {
-  background: #00cc99;
 }
 
 #loader {
