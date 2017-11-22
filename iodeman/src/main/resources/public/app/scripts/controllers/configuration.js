@@ -39,6 +39,7 @@ angular.module('publicApp')
 				$scope.planning.rooms.find(function(r) {
 					if(r.name == room.name) {
 						$scope.selectedRooms.push(room);
+
 					}
 				});
 			});
@@ -46,7 +47,21 @@ angular.module('publicApp')
 	});
 
 	$scope.addRoom = function() {
-		if ($scope.newRoom != '' && $scope.newRoom != null) {
+
+
+        $scope.errorNameRoom = false;
+
+        angular.forEach($scope.allRooms, function(value, key) {
+
+            if (value.name === $scope.newRoom.name) {
+
+                $scope.errorNameRoom = true;
+
+            }
+        });
+
+        console.log($scope.allreadyroom);
+        if ($scope.newRoom !== '' && $scope.newRoom !== null && $scope.errorNameRoom != true   ) {
 			var createRoomRequest = $http.get(backendURL + 'room/create', {
 				params: {
 					name: $scope.newRoom.name
