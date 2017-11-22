@@ -9,7 +9,6 @@
  */
 angular.module('publicApp')
 .controller('MenuCtrl', function ($scope, $http, backendURL, Auth, $routeParams) {
-
 	$http.get(backendURL + 'user').success(function(data) {
 		$scope.user = data;
 	});
