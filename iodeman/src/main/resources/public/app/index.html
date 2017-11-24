@@ -5,7 +5,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <meta charset="UTF-8">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" media="all"/>
@@ -19,7 +18,6 @@
           media="all">
     <link rel="stylesheet" href="node_modules/angular-flash-alert/dist/angular-flash.min.css" media="all">
     <link rel="stylesheet" href="app/styles/ariane.css"/>
-
 </head>
 <body ng-app="publicApp">
     <!--[if lte IE 8]>
@@ -27,30 +25,23 @@
         your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
     <div class="header" ng-controller="MenuCtrl">
         <div class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                             data-target="#js-navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
                     <a class="navbar-brand" href="#/">PossiCat</a>
                 </div>
-
-                <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#/">Accueil</a></li>
+                <div class="navbar-collapse" id="js-navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ng-show="user.firstName != null"><a>Bienvenue {{user.firstName}}&nbsp;{{user.lastName}}</a></li>
                         <li><a data-toggle="tooltip" title="Se deconnecter" style="color: white;" href="/api/auth/logout"><i
                                 class="glyphicon glyphicon-log-out"></i></a></li>
-                        <li ng-show="user.firstName != null"><a>Bienvenue {{user.firstName}}&nbsp;{{user.lastName}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -69,6 +60,7 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="app/scripts/assets/arrive.min.js"></script>
@@ -95,7 +87,6 @@
     <script src="node_modules/ngstorage/ngStorage.min.js"></script>
     <script src="app/_/bower_components/lodash/dist/lodash.min.js"></script>
     <script src="app/_/bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>
-
     <script src="app/scripts/assets/locale-fr.js"></script>
 
     <!-- endbuild -->

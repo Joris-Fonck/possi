@@ -39,9 +39,7 @@
                 <tbody>
                     <tr ng-repeat="planning in plannings">
                         <td>{{ planning.name }}</td>
-                        <td>
-                            {{ planning.admin.firstName }} {{ planning.admin.lastName }}
-                        </td>
+                        <td>{{ planning.admin.firstName }} {{ planning.admin.lastName }}</td>
                         <td>{{ planning.period.from | date:'dd/MM/yyyy' }}</td>
                         <td>{{ planning.period.to | date:'dd/MM/yyyy' }}</td>
                         <td>
