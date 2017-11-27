@@ -20,7 +20,8 @@ angular.module('publicApp', [
 	'angularjs-dropdown-multiselect',
 	'ngStorage',
 	'ngLocale',
-	'dndLists'
+	'dndLists',
+    'datatables'
 ])
 
 .constant("backendURL", "http://localhost:8080/")
@@ -83,10 +84,10 @@ angular.module('publicApp', [
 	  if(input == null) {
 		  return input;
 	  }
-
 	  return input.split("@")[0].replace('.', ' ');
   }
 })
+
 .filter('capitalize', function() {
 	return function(input, all) {
 		var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;

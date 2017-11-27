@@ -12,6 +12,15 @@ angular.module('publicApp')
 	$.material.init();
 	$scope.connected = false;
 
+    $scope.dtOptions = {
+    	info : false,
+    	paging : false,
+		search : true,
+		language : {
+    		search : ""
+		},
+    };
+
 	$http.get(backendURL + 'plannings/exported').success(function(data) {
 		$scope.exported = data.keys;
 	});
