@@ -64,10 +64,8 @@
                                     <div class="col-md-12 col-sm-12">
                                         <div ng-show="errorImport" class="alert alert-danger" role="alert">
                                             Une erreur est survenue lors de l'import CSV
-                                            <p> Vérifiez que le séparateur dans le fichier csv est bien une virgule ","
-                                            <p>
-
-                                                <img style="max-width: 100%;" src="app/images/donnees.png"/>
+                                            <p> Vérifiez que le séparateur dans le fichier csv est bien une virgule ","</p>
+                                            <p> <img style="max-width: 100%;" src="app/images/donnees.png"/> </p>
                                                 <br/><br/>
                                             <p>Le champ "Etudiant" et "Tuteur-Entreprise" doit contenir une adresse
                                                 électronique (de la forme prenom.nom@univ-rennes1.fr) qui doit être reconnue
@@ -80,29 +78,20 @@
                                             large pour pouvoir gérer autant de participants
                                         </div>
 
-                                        <div ng-show="errorNoParticipant" class="alert alert-danger"
-                                             role="alert">Veuillez importer une liste de participants.
+                                        <div ng-show="errorNoParticipant" class="alert alert-danger" role="alert">
+                                            Veuillez importer une liste de participants.
                                         </div>
 
                                         <div ng-show="errorNoRoom" class="alert alert-danger" role="alert">
                                             Veuillez indiquer une liste de salles disponibles.
                                         </div>
 
-                                        <!-- <div class="alert alert-info" role="alert" style="margin-top:5px">
-                                            <h3>Informations concernant le fichier CSV d'import de participants</h3>
-                                            <ul>
-                                                <li>Le fichier d'import doit être de type <b>.csv</b></li>
-                                                <li>Les têtes de colonnes sont <b>obligatoires</b> et doivent être strictement dans l'ordre suivant: <br />
-                                                <b>Adresse mail de l'étudiant | Nom de l'étudiant | Prénom de l'étudiant | Entreprise + lieu | Adresse mail du tuteur enseignant | Nom prénom du tuteur entreprise | </b></li>
-                                            </ul>
-                                        </div> -->
-
-                                        <div ng-hide="noParticipants" class="csv_file_name">Fichier csv :
-                                            {{planning.csv_file}}
+                                        <div ng-hide="noParticipants" class="csv_file_name">
+                                            Fichier csv : {{planning.csv_file}}
                                         </div>
+
                                         <form ng-show="showImportButton" id="formUpload" method="POST"
-                                              enctype="multipart/form-data" action="{{ uploadFileURL }}"
-                                              style="margin: 0 25px;">
+                                              enctype="multipart/form-data" action="{{ uploadFileURL }}" style="margin: 0 25px;">
                                             <input style="display: inline;" id="upload_file" type="file" name="file"
                                                    accept=".csv" onchange="ValidateSingleInput(this);"/>
                                             <button title="Aide fichier CSV" type="button" class="btn btn-primary btn-lg"
@@ -122,10 +111,9 @@
                                                         <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close"><span aria-hidden="true">&times;</span>
                                                         </button>
-                                                        <h4 class="modal-title" id="myModalLabel">Importer un fichier
-                                                            CSV</h4>
+                                                        <h4 class="modal-title" id="myModalLabel">
+                                                            Importer un fichier CSV</h4>
                                                     </div>
-
                                                     <div class="modal-body">
                                                         <img style="max-width: 100%;" src="app/images/donnees.png"/>
                                                         <br/><br/>
@@ -230,18 +218,18 @@
                         </uib-tab>
                         <uib-tab heading="Configuration" class="btn btn-xs btn-raised btn-primary">
                             <div ng-controller="ConfigurationCtrl">
-                                <div class="row">
-                                    <div class="col-lg-12">
+                                <div class="col">
+                                    <div class="col-md-12">
                                         <div ng-show="errorNameRoom" class="alert alert-danger" role="alert">
                                           Le nom de salle existe déjà
                                         </div>
                                         <div class="panel panel-default">
                                             <div class="panel-body">
-                                                <div class="page-header">
-                                                    <h2>Gestion des salles</h2>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-4">
+                                                <div class="col-md-6">
+                                                    <div class="page-header">
+                                                        <h2>Gestion des salles</h2>
+                                                    </div>
+                                                    <div class="row-lg-4">
                                                         <i>Sélectionnez les salles parmi la liste ci dessous :</i>
                                                         <div ng-dropdown-multiselect="" options="allRooms"
                                                              selected-model="selectedRooms"
@@ -249,9 +237,9 @@
                                                         </div>
                                                         {{ selectedRooms.id }}
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="row-lg-6">
                                                         <i>Ajoutez une salle si elle n'y figure pas :</i>
-                                                        <div class="input-group">
+                                                        <div class="input-group col-md-8">
                                                             <input ng-model="newRoom.name" type="text"
                                                                    class="form-control" placeholder="Nouvelle salle...">
                                                             <span class="input-group-btn">
@@ -265,11 +253,11 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="page-header">
-                                                    <h2>Gestion des priorités</h2>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-10">
+                                                <div class="col-md-6 center-block">
+                                                    <div class="page-header">
+                                                        <h2>Gestion des priorités</h2>
+                                                    </div>
+                                                    <div class="row-lg-4">
                                                         <i>Glissez-déposez pour prioriser les contraintes, par ordre
                                                             décroissant d'importance.</i>
                                                         <ul id="contraintesList" class="list-unstyled">

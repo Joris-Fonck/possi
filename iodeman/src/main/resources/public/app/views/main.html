@@ -3,7 +3,7 @@
 <div id="page-inner" ng-show="connected">
     <div class="panel panel-primary" id="home-info">
         <div class="panel-heading">
-            <h3 class="panel-title">Bienvenue sur PossiCat
+            <h3 class="panel-title">Bienvenue sur PossiApp
                 <button type="button" class="close" aria-label="Close" ng-click="closeHomeInfo()" color="text-white">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -15,7 +15,7 @@
                 <span ng-if="user.role == 'PROF'">, professeur à l'université.</span>
                 <span ng-if="user.role != 'PROF'">, étudiant à l'université.</span>
             </p>
-            PossiCat est un outil permettant de simplifier la planification de soutenances.
+            PossiApp est un outil permettant de simplifier la planification de soutenances.
             Accédez aux plannings vous concernant dans le tableau ci-dessous, et saisissez vos indisponibilités.
         </div>
     </div>
@@ -56,8 +56,9 @@
                                 Gérer le planning
                             </a>
                             <a data-toggle="tooltip" title="Voir le planning" ng-show="exported.indexOf(planning.id)!=-1"
-                               class="btn btn-raised btn-sm btn-success" href="#/generatedPlanning/{{ planning.id }}"><i
-                                    class="glyphicon glyphicon-calendar"></i></a>
+                               class="btn btn-raised btn-sm btn-success" href="#/generatedPlanning/{{ planning.id }}">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </a>
                             <a data-toggle="tooltip" title="Créer un draft"
                                ng-show="exported.indexOf(planning.id)!=-1 && planning.admin.uid == user.uid"
                                href="#/duplicatePlanning/{{ planning.id }}"

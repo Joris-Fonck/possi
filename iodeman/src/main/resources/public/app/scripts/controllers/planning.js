@@ -15,7 +15,7 @@ angular.module('publicApp')
             selectionCount: "checked",
             searchPlaceholder: "Search...",
             buttonDefaultText: "Selectionner une salle",
-            dynamicButtonTextSuffix: "salles selectionnees"
+            dynamicButtonTextSuffix: "salle(s) selectionnee(s)"
      };
 	
 	if($routeParams.import == "nok") {

@@ -17,7 +17,8 @@ angular.module('publicApp')
     	paging : false,
 		search : true,
 		language : {
-    		search : ""
+    		search : "",
+    		searchPlaceholder : "Recherche"
 		},
     };
 

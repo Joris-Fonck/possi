@@ -19,6 +19,15 @@ angular.module('publicApp')
 	$scope.selectedRooms = [];
 	$scope.allRooms = [];
 
+    $scope.settings = {
+        checkAll: "Selectionner toutes les salles",
+        uncheckAll: "Deselectionner toutes les salles",
+        selectionCount: "checked",
+        searchPlaceholder: "Search...",
+        buttonDefaultText: "Selectionner une salle",
+        dynamicButtonTextSuffix: "salle(s) selectionnee(s)"
+    };
+
 	$http.get(backendURL + 'planning/find/'+$scope.id).success(function(data) {
 		$scope.planning = data;
 		
@@ -26,7 +35,7 @@ angular.module('publicApp')
 			return p.weight;
 		}, true);
 		
-		$( "#sortable" ).sortable({ 
+		$("#sortable").sortable({
 			placeholder: "ui-sortable-placeholder" 
 		});
 
@@ -39,7 +48,6 @@ angular.module('publicApp')
 				$scope.planning.rooms.find(function(r) {
 					if(r.name == room.name) {
 						$scope.selectedRooms.push(room);
-
 					}
 				});
 			});
@@ -47,16 +55,12 @@ angular.module('publicApp')
 	});
 
 	$scope.addRoom = function() {
-
-
         $scope.errorNameRoom = false;
 
         angular.forEach($scope.allRooms, function(value, key) {
 
             if (value.name === $scope.newRoom.name) {
-
                 $scope.errorNameRoom = true;
-
             }
         });
 
@@ -75,9 +79,7 @@ angular.module('publicApp')
 				$scope.allRooms.push(room);
 				$scope.newRoom.name = '';
 			});
-
 		}
-
 	};
 
 	$scope.submit = function() {
@@ -107,8 +109,8 @@ angular.module('publicApp')
 		})
 		
 		$http.post(
-				backendURL + 'planning/'+$scope.id+'/priorities/update',
-				$scope.planning.priorities
+			backendURL + 'planning/'+$scope.id+'/priorities/update',
+			$scope.planning.priorities
 		)
 
 		$http.get(backendURL + 'planning/update', {
@@ -142,5 +144,4 @@ angular.module('publicApp')
 			});
 		}
 	});
-
 });
