@@ -17,7 +17,7 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
 		search : true,
 		language : {
     		search : "",
-    		searchPlaceholder : "Recherche"
+    		searchPlaceholder : "Recherche ..."
 		},
     };
 
