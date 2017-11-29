@@ -47,11 +47,11 @@ public class FileUploadController {
                 stream.close();
             } catch (Exception e) {
             	e.printStackTrace();
-				return "redirect:/#/planning/"+planningId+"?import=nok";
+				return "redirect:/#/planning/create/participant/" + planningId + "?import=nok";
 
 			}
         }
-    	
+
     	// on l'envoie au service
     	Planning planning = planningService.findById(new Integer(planningId));
     	try {
@@ -59,14 +59,12 @@ public class FileUploadController {
 			planningService.update(planning, planning.getName(), nameCsv, planning.getPeriod(), planning.getOralDefenseDuration(), planning.getOralDefenseInterlude(), planning.getLunchBreak(), planning.getDayPeriod(), planning.getNbMaxOralDefensePerDay(),planning.getRooms());
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/#/planning/"+planningId+"?import=nok";
+			return "redirect:/#/planning/create/participant/" + planningId + "?import=nok";
 			// affcher erreur de format
 		}
     	
     	outputFile.delete();
     	
-    	return "redirect:/#/planning/"+planningId+"?import=ok";
-
+    	return "redirect:/#/planning/create/participant/" + planningId + "?import=ok";
     }
-
 }

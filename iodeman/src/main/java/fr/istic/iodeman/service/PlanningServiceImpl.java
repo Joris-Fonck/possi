@@ -194,7 +194,6 @@ public class PlanningServiceImpl implements PlanningService {
 	}
 
 	public Planning importPartcipants(Planning planning, File file) throws Exception {
-
 		ParticipantsImport participantsImport = new ParticipantsCSVImport();
 		participantsImport.configure(personResolver);
 		Collection<Participant> participants = participantsImport.execute(file);
@@ -437,10 +436,11 @@ public class PlanningServiceImpl implements PlanningService {
 		
 		// parsing for getting uids or person
 		Collection<String> uids = Lists.newArrayList();
-		for(Participant p : participants){
+		for(Participant p : participants) {
 			if (!uids.contains(p.getStudent().getUid())) {
 				uids.add(p.getStudent().getUid());
 			}
+
 			if (!uids.contains(p.getFollowingTeacher().getUid())) {
 				uids.add(p.getFollowingTeacher().getUid());
 			}

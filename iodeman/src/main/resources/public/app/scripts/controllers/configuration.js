@@ -7,18 +7,7 @@
  * # RoomCtrl
  * Controller of the publicApp
  */
-angular.module('publicApp')
-.controller('ConfigurationCtrl', function ($scope, backendURL, $http, $routeParams, $timeout, Flash) {
-
-	$http.get(backendURL + 'user').success(function(data) {
-		$scope.user = data;
-	});
-
-	$scope.id = $routeParams.idPlanning;
-
-	$scope.selectedRooms = [];
-	$scope.allRooms = [];
-
+angular.module('publicApp').controller('ConfigurationCtrl', function ($scope, $log, $location, $rootScope, backendURL, $http, $routeParams, Flash) {
     $scope.settings = {
         checkAll: "Selectionner toutes les salles",
         uncheckAll: "Deselectionner toutes les salles",
@@ -28,19 +17,35 @@ angular.module('publicApp')
         dynamicButtonTextSuffix: "salle(s) selectionnee(s)"
     };
 
-	$http.get(backendURL + 'planning/find/'+$scope.id).success(function(data) {
+    $scope.allRooms = [];
+    $scope.selectedRooms = [];
+    $scope.id = $routeParams.idPlanning;
+
+	$http.get(backendURL + 'user').success(function(data) {
+		$scope.user = data;
+	});
+
+    //On vérifie que l'on est en train de créer un planning
+    if($location.url().search("/create/") == -1) {
+        $('.wizard-inner').css('display', 'none');
+    } else {
+        $('.back_arrow').css('display', 'none');
+    }
+
+	$http.get(backendURL + 'planning/find/' + $scope.id).success(function(data) {
 		$scope.planning = data;
-		
+
 		$scope.planning.priorities = data.priorities.sortBy(function(p) {
 			return p.weight;
 		}, true);
-		
-		$("#sortable").sortable({
-			placeholder: "ui-sortable-placeholder" 
+
+		$( "#sortable" ).sortable({
+			placeholder: "ui-sortable-placeholder"
 		});
 
 		$http.get(backendURL + 'room/list').success(function(data) {
 			$scope.rooms = data;
+
 			$scope.rooms.each(function(room) {
 				room.label = room.name;
 				room.id = room.name;
@@ -83,19 +88,19 @@ angular.module('publicApp')
 	};
 
 	$scope.submit = function() {
-
 		var roomsNames = $scope.selectedRooms.map(function(r) {
 			return r.id;
 		});
+
 		var priorities = [];
 		$("#contraintesList").each(function () {
-			$(this).find('li').each(function(){
+			$(this).find('li').each(function() {
 				// cache jquery var
 				var current = $(this);
 				priorities.push(current.find('div').attr("id"));
 			});
 		});
-		
+
 		$scope.planning.priorities.forEach(function(value, key) {
 			if(priorities[0] == value.id) {
 				value.weight = 3;
@@ -106,27 +111,27 @@ angular.module('publicApp')
 			if(priorities[2] == value.id) {
 				value.weight = 1;
 			}
-		})
-		
-		$http.post(
-			backendURL + 'planning/'+$scope.id+'/priorities/update',
-			$scope.planning.priorities
-		)
-
-		$http.get(backendURL + 'planning/update', {
-			params: {
-				planningID: $scope.planning.id,
-				rooms: roomsNames
-			}
 		});
+
+		$http.post(
+			backendURL + 'planning/' + $scope.id + '/priorities/update',
+			$scope.planning.priorities
+		).success(function() {
+            $http.get(backendURL + 'planning/update', {
+                params: {
+                    planningID: $scope.planning.id,
+                    rooms: roomsNames
+                }
+            }).success(function() {
+                location.href = "/";
+            });
+        });
+
 		/*var updateRequest = backend.plannings.update({
 			planningID: $scope.planning.id,
 			rooms: roomsNames,
 			//priorities: priorities
 		});*/
-
-		Flash.create('success', '<strong> Modifications effectu&eacute;es!</strong> La configuration a &eacute;t&eacute; mise &agrave; jour.');
-		
 	}
 
 	var contraintesList = $('#contraintesList');
@@ -139,8 +144,6 @@ angular.module('publicApp')
 			$('.panel', contraintesList).each(function(index, elem) {
 				var $listItem = $(elem),
 					newIndex = $listItem.index();
-
-				// Persist the new indices.
 			});
 		}
 	});

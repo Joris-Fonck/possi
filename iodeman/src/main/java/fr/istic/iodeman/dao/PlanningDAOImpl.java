@@ -412,13 +412,6 @@ public class PlanningDAOImpl extends AbstractHibernateDAO implements PlanningDAO
 	public Map<String, Integer> findParticipantsAndUnavailabilitiesNumber(
 			Planning planning, Collection<String> uids) {
 		Session session = getNewSession();
-		
-//		SELECT Person.uid, count(Unavailability.person_id) as nbUnavailabilities
-//		FROM Unavailability, Person 
-//		WHERE Unavailability.person_id=Person.id
-//		AND planning_id=1
-//		AND Person.uid IN ("13008385", "13006294")
-//		GROUP BY Unavailability.person_id
 
 		Criteria criteria = session.createCriteria(Unavailability.class);
 		
@@ -427,24 +420,21 @@ public class PlanningDAOImpl extends AbstractHibernateDAO implements PlanningDAO
 		
 		// projections
 		criteria.setProjection(Projections.projectionList()
-				.add(Property.forName("person1.uid"))
-				.add(Projections.rowCount())
-				.add(Projections.groupProperty("person1.id").as("person1.id"))
+			.add(Property.forName("person1.uid"))
+			.add(Projections.rowCount())
+			.add(Projections.groupProperty("person1.id").as("person1.id"))
 		);
 		
 		// restrictions
 		criteria.add(Restrictions.and(
 				Restrictions.eq("planning.id", planning.getId()),
 				Restrictions.in("person1.uid", uids)
-				)
+			)
 		);
 			
-		Iterator it = criteria
-				.list()
-				.iterator();
+		Iterator it = criteria.list().iterator();
 		
 		session.close();
-		
 		
 		// processing
 		Map<String, Integer> map = new HashMap<String, Integer>();	

@@ -184,6 +184,30 @@ GenratedPlanning.html
   font-size: 14px;
 }
 
+#formUpload {
+    padding-top: 50px;
+    padding-bottom: 70px;
+}
+
+#upload_file {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #4caf50;
+    font-size: 20px;
+    color: white;
+}
+
+.indent {
+    text-indent: 15px;
+}
+
 .right-button{
   float: right;
 }

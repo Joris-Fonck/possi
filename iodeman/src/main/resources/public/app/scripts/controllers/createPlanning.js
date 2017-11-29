@@ -7,9 +7,7 @@
  * # ImportCtrl
  * Controller of the publicApp
  */
-angular.module('publicApp')
-.controller('CreatePlanningCtrl', function ($scope, $http, backendURL, Auth, $routeParams) {
-
+angular.module('publicApp').controller('CreatePlanningCtrl', function ($scope, $rootScope, $http, backendURL, Auth, $routeParams) {
 	$http.get(backendURL + 'user').success(function(data) {
 		$scope.user = data;
 	});
@@ -43,17 +41,17 @@ angular.module('publicApp')
 	$scope.showError = false;
 
 	$scope.planning = {
-			name: '',
-			periodStart: '',
-			periodEnd: '',
-			oralDefenseDuration: '',
-			oralDefenseInterlude: '',
-			lunchBreakStart: '',
-			lunchBreakEnd: '',
-			dayPeriodStart: '',
-			dayPeriodEnd: '',
-			nbMaxOralDefensePerDay: '',
-			rooms: ''
+        name: '',
+        periodStart: '',
+        periodEnd: '',
+        oralDefenseDuration: '',
+        oralDefenseInterlude: '',
+        lunchBreakStart: '',
+        lunchBreakEnd: '',
+        dayPeriodStart: '',
+        dayPeriodEnd: '',
+        nbMaxOralDefensePerDay: '',
+        rooms: ''
 	};
 
 	// day period
@@ -74,9 +72,8 @@ angular.module('publicApp')
 	}
 
 	$scope.submit = function() {
-
-		console.log($scope.planning);
-		console.log(inputStartingDate.val());
+		/*console.log($scope.planning);
+		console.log(inputStartingDate.val());*/
 
 		$scope.planning.periodStart = Date.create($scope.inputStartingDate,'{dd}/{MM}/{yyyy}').format('{yyyy}-{MM}-{dd}');
 		$scope.planning.periodEnd = Date.create($scope.inputEndingDate,'{dd}/{MM}/{yyyy}').format('{yyyy}-{MM}-{dd}');
@@ -87,10 +84,9 @@ angular.module('publicApp')
 		$scope.planning.oralDefenseDuration = inputDuration.val();
 		$scope.planning.oralDefenseInterlude = inputInterlude.val();
 
-		console.log($scope.planning);
-
+		/*console.log($scope.planning);
 		console.log($scope.planning.dayPeriodStart);
-		console.log($scope.planning.dayPeriodStart > $scope.planning.lunchBreakStart)
+		console.log($scope.planning.dayPeriodStart > $scope.planning.lunchBreakStart):*/
 
 		var validate = true;
 
@@ -98,45 +94,45 @@ angular.module('publicApp')
 		// period
 		if ($scope.planning.periodStart > $scope.planning.periodEnd) {
 			console.log("in");
-			$("#showErrorInfo").text('Dates de periode sont incoherentes');
-			$scope.errorAodren = 'Dates de periode sont incoherentes';
-			validate = false; 
+			$("#showErrorInfo").text('Les dates de periode sont incoherentes.');
+			validate = false;
 		} else if ($scope.planning.dayPeriodStart >= $scope.planning.dayPeriodEnd) {
-			$("#showErrorInfo").text("Heures de debut et de fin ne sont pas correctes");
-            $scope.errorAodren = 'Heures de debut et de fin ne sont pas correctes';
-
+			$("#showErrorInfo").text("Les heures de debut et de fin sont incorrectes.");
             validate = false;
 		} else if ($scope.planning.lunchBreakStart > $scope.planning.lunchBreakStart) {
-			$("#showErrorInfo").text("Heures de repas incorrecte");
-
+			$("#showErrorInfo").text("Les heures de repas sont incorrectes.");
 
             validate = false;
 		} else if (
 				($scope.planning.dayPeriodStart >= $scope.planning.lunchBreakStart)
 				||
 				($scope.planning.dayPeriodEnd <= $scope.planning.lunchBreakEnd)
-		){
+		) {
 			$("#showErrorInfo").text("Heures incoherentes");
 
             validate = false;
 		}
 
+		console.log($scope.planning);
+
+		if($scope.planning.name === "") {
+            $("#showErrorInfo").text("Le nom du planning est manquant.");
+            validate = false;
+        }
+
 		// END validation
 
-		if (validate){
-
+		if (validate) {
 			$http.get(backendURL + 'planning/create', {
 				params: $scope.planning
 			}).success(function(data) {
 				console.log('planning created!');
-				document.location.href = "#/planning/"+data.id;
+
+				location.href = "#/planning/create/participant/" + data.id;
 			}).error(function(data) {
 				$("#showError").show();
-//				$scope.showError = true;
-//				$scope.$apply();
 				console.log('error. cannot create planning!');
 			});
-
 		} else {
 			// I prefer use jQuery rather angular
 			// There were some errors with angular
@@ -145,7 +141,6 @@ angular.module('publicApp')
 		}
 
 	};
-
 
 	$scope.today = function() {
 		$scope.inputStartingDate = new Date();
@@ -167,16 +162,16 @@ angular.module('publicApp')
 	};
 
 	$scope.dateOptions = {
-			formatYear: 'yy',
-			startingDay: 1
+        formatYear: 'yy',
+        startingDay: 1
 	};
 
 	$scope.popup1 = {
-			opened: false
+        opened: false
 	};
 
 	$scope.popup2 = {
-			opened: false
+        opened: false
 	};
 
 	$scope.getDayClass = function(date, mode) {
@@ -221,8 +216,8 @@ angular.module('publicApp')
 	$scope.mstep = 1;
 
 	$scope.options = {
-			hstep: [1, 2, 3],
-			mstep: [1, 5, 10, 15, 25, 30]
+        hstep: [1, 2, 3],
+        mstep: [1, 5, 10, 15, 25, 30]
 	};
 
 	$scope.ismeridian = false;

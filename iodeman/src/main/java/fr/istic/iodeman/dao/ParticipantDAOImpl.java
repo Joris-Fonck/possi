@@ -15,6 +15,7 @@ public class ParticipantDAOImpl extends AbstractHibernateDAO implements Particip
 	public void persist(Participant par) {
 		Session session = getNewSession();
 		Transaction transaction = null;
+
 		try {
 			transaction = session.beginTransaction();
 			session.persist(par);

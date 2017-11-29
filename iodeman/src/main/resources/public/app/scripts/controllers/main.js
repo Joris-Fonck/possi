@@ -7,8 +7,7 @@
  * # MainCtrl
  * Controller of the publicApp
  */
-angular.module('publicApp')
-.controller('MainCtrl', function ($scope, $http, $log, backendURL, Auth, $sessionStorage, $rootScope, $timeout) {
+angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope, $http, $log, backendURL, Auth, $sessionStorage) {
 	$.material.init();
 	$scope.connected = false;
 
@@ -44,9 +43,9 @@ angular.module('publicApp')
 	};
 
 	$scope.remove = function(id) {
-		$log.debug(backendURL + 'planning/'+id+'/delete');
+		$log.debug(backendURL + 'planning/' + id + '/delete');
 
-		$http.get(backendURL + 'planning/'+id+'/delete').success(function () {
+		$http.get(backendURL + 'planning/' + id + '/delete').success(function () {
 			for(var i = $scope.plannings.length - 1; i >= 0; i--) {
 			    if($scope.plannings[i].id === id) {
 			    	$scope.plannings.splice(i, 1);
@@ -54,4 +53,32 @@ angular.module('publicApp')
 			}
 		});
 	}
+
+    $scope.validate = function() {
+        $http.get(backendURL + 'planning/find/' + $scope.id).success(function(data) {
+            $scope.planning = data;
+            $scope.errorValidate = false;
+            $scope.errorNoParticipant = false;
+            $scope.errorNoRoom = false;
+
+            if ($scope.participants == null || $scope.participants.length == 0) {
+                $scope.errorNoParticipant = true;
+                return;
+            }
+
+            if ($scope.planning.rooms == null || $scope.planning.rooms.length == 0) {
+                $scope.errorNoRoom = true;
+                return;
+            }
+
+            $http.get(backendURL + 'planning/' + $scope.id + '/validate')
+                .success(function(data) {
+                    console.log(data);
+                    document.location.href = $scope.fileURL;
+                })
+                .error(function(data) {
+                    console.log(data);
+                });
+        });
+    };
 });

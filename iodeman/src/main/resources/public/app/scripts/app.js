@@ -27,7 +27,7 @@ angular.module('publicApp', [
 .constant("backendURL", "http://localhost:8080/")
 .constant("backendURL2", "http://possi.istic.univ-rennes1.fr:8080/")
 
-.config(function ($routeProvider) {
+.config(function ($routeProvider, $locationProvider) {
     $routeProvider
         .when('/', {
             templateUrl: 'app/views/main.html',
@@ -39,10 +39,30 @@ angular.module('publicApp', [
             controller: 'CreatePlanningCtrl',
             controllerAs: 'createPlanningCtrl'
         })
-        .when('/planning/:idPlanning', {
-            templateUrl: 'app/views/planning.html',
-            controller: 'PlanningCtrl',
-            controllerAs: 'planningCtrl'
+        .when('/planning/create/participant/:idPlanning', {
+            templateUrl: 'app/views/participant.html',
+            controller: 'ParticipantCtrl',
+            controllerAs: 'participantCtrl'
+        })
+        .when('/planning/create/configuration/:idPlanning', {
+            templateUrl: 'app/views/configuration.html',
+            controller: 'ConfigurationCtrl',
+            controllerAs: 'configurationCtrl'
+        })
+        .when('/planning/participant/:idPlanning', {
+            templateUrl: 'app/views/participant.html',
+            controller: 'ParticipantCtrl',
+            controllerAs: 'participantCtrl'
+        })
+        .when('/planning/configuration/:idPlanning', {
+            templateUrl: 'app/views/configuration.html',
+            controller: 'ConfigurationCtrl',
+            controllerAs: 'configurationCtrl'
+        })
+        .when('/planning/draft/:idPlanning', {
+            templateUrl: 'app/views/draft.html',
+            controller: 'DraftCtrl',
+            controllerAs: 'draftCtrl'
         })
         .when('/generatedPlanning/:idPlanning', {
             templateUrl: 'app/views/generatedPlanning.html',
@@ -60,7 +80,7 @@ angular.module('publicApp', [
             controllerAs: 'unavailabilitiesCtrl'
         })
         .when('/duplicatePlanning/:idPlanning', {
-            templateUrl: 'app/views/planning.html',
+            templateUrl: 'app/views/draft.html',
             controller: 'DuplicatePlanningCtrl',
             controllerAs: 'duplicatePlanningCtrl'
         })

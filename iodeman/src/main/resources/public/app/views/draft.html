@@ -1,0 +1,43 @@
+<div ng-controller="DraftCtrl">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr >
+            <th>Planning</th>
+            <th>Admin</th>
+            <th>Debut</th>
+            <th>Fin</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="draft in drafts">
+            <td> {{ draft.name}}</td>
+            <td>{{ draft.admin.firstName }} {{ draft.admin.lastName }}</td>
+            <td>{{ draft.period.from | date:'dd/MM/yyyy' }}</td>
+            <td>{{ draft.period.to | date:'dd/MM/yyyy' }}</td>
+            <td>
+                <a href="#/planning/switchDraft/{{ draft.id }}" class="btn btn-raised btn-sm btn-success">
+                    Basculer en PLAN-REF
+                </a>
+                <a data-toggle="tooltip" title="Modifier le draft" class="btn btn-raised btn-sm btn-info" href="#/generatedDraft/{{ draft.id }}"><i class="glyphicon glyphicon-edit"></i></a>
+                <a data-toggle="tooltip" title="Créer un draft" ng-show="exported.indexOf(draft.id)!=-1" ng-hide="planning.admin.uid != user.uid" href="#/duplicateDraft/{{ draft.id }}" class="btn btn-raised btn-sm btn-info hidden-xs">
+                    <i class="glyphicon glyphicon-duplicate"></i>
+                </a>
+                <a data-toggle="tooltip" title="Supprimer le draft" confirmed-click="remove( draft.id )" ng-confirm-click="Êtes vous sûr de vouloir supprimer ce planning?" ng-hide="" class="btn btn-raised btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-12 pull-right">
+            <ul class="list-inline pull-right">
+                <li>
+                    <button type="submit" class="btn btn-raised btn-success next-step"
+                            ng-click="submit()">Configurer
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

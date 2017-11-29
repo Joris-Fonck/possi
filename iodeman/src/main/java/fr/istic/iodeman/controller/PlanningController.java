@@ -185,7 +185,7 @@ public class PlanningController {
 
     @RequestMapping("/{id}/participants/unavailabilities")
     public Collection<ParticipantDTO> getParticipantsAndUnavailabilitiesNumber(@PathVariable("id") Integer id) {
-
+        System.out.println("TESTSTTTTT");
         session.teacherOnly();
 
         Planning planning = planningService.findById(id);

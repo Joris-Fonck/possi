@@ -29,10 +29,9 @@ public class ParticipantsCSVImport implements ParticipantsImport {
         String line = "";
         String cvsSplitBy = ";";
         
-        System.err.println("debut");
+        //System.err.println("debut");
         
         try {
-
             br = new BufferedReader(new FileReader(file));
             
             line = br.readLine();
@@ -52,8 +51,6 @@ public class ParticipantsCSVImport implements ParticipantsImport {
                 String[] row = line.split(cvsSplitBy);
                 
                 System.err.println(row[1].trim() + " " + row[2].trim());
-                String stu_nom = row[1].trim();
-                String stu_prenom = row[2].trim();
                 
                 // create participants
     			Participant participant = new Participant();
@@ -70,7 +67,7 @@ public class ParticipantsCSVImport implements ParticipantsImport {
     				student.setEmail(normedEmail);
     			}
     			
-    			System.err.println("1");
+    			//System.err.println("1");
     			
     			// following teacher
     			email = row[4].trim();
@@ -84,7 +81,7 @@ public class ParticipantsCSVImport implements ParticipantsImport {
     			
     			String tutorFullName = row[5].trim();
     			
-    			System.err.println("2");
+    			//System.err.println("2");
 				
 				participant.setTutorFullName(tutorFullName);
 				// Compagny
@@ -96,7 +93,7 @@ public class ParticipantsCSVImport implements ParticipantsImport {
     			
     			participants.add(participant);
     			
-    			System.err.println("3");
+    			//System.err.println("3");
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -112,7 +109,7 @@ public class ParticipantsCSVImport implements ParticipantsImport {
             }
         }
         
-        System.err.println("fin");
+        //System.err.println("fin");
 		
         return participants;
 	}
