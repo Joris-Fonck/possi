@@ -18,7 +18,7 @@ angular.module('publicApp')
 		search : true,
 		language : {
     		search : "",
-    		searchPlaceholder : "Recherche"
+    		searchPlaceholder : "Recherche ..."
 		},
     };
 
