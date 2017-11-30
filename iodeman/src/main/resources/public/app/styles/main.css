@@ -7,7 +7,7 @@
 
 body {
     padding: 0;
-    background: #00cc99;
+    background: #EEE;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -49,6 +49,24 @@ body {
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
+}
+
+.btn-warning {
+    background-color: #f0ad4e !important;
+}
+
+#btn-indispo {
+    background-color: #999999;
+}
+
+#DataTables_Table_0_filter input {
+    border-radius: 8px;
+    background-color: white;
+    color: #454545;
+}
+
+#DataTables_Table_0_filter input::placeholder {
+    color: #BDBDBD;
 }
 
 /* Supporting marketing content */
