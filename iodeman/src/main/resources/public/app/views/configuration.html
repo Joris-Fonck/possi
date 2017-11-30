@@ -52,143 +52,81 @@
                             </h1>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="row">
                         <div class="col-md-12">
                             <div ng-show="errorNameRoom" class="alert alert-danger" role="alert">
                                 Le nom de salle existe déjà
                             </div>
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <div class="col-md-6">
-                                        <div class="page-header">
-                                            <h2>Gestion des salles</h2>
+                            <div class="col-md-5">
+                                <div class="page-header">
+                                    <h2>Gestion des salles</h2>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i>Sélectionnez les salles parmi la liste ci dessous :</i>
+                                        <div ng-dropdown-multiselect="" options="allRooms"
+                                             selected-model="selectedRooms"
+                                             translation-texts="settings">
                                         </div>
-                                        <div class="row-lg-4">
-                                            <i>Sélectionnez les salles parmi la liste ci dessous :</i>
-                                            <div ng-dropdown-multiselect="" options="allRooms"
-                                                 selected-model="selectedRooms"
-                                                 translation-texts="settings">
+                                        {{ selectedRooms.id }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <i>Ajoutez une salle si elle n'y figure pas :</i>
+                                        <div class="input-group">
+                                            <input ng-model="newRoom.name" type="text"
+                                                   class="form-control" placeholder="Nouvelle salle...">
+                                            <span class="input-group-btn">
+                                            <div class="input-group-btn">
+                                                <button ng-click="addRoom()"
+                                                        class="btn btn-raised btn-sm btn-success"
+                                                        type="button">Ajouter salle</button>
                                             </div>
-                                            {{ selectedRooms.id }}
-                                        </div>
-                                        <div class="row-lg-6">
-                                            <i>Ajoutez une salle si elle n'y figure pas :</i>
-                                            <div class="input-group col-md-8">
-                                                <input ng-model="newRoom.name" type="text"
-                                                       class="form-control" placeholder="Nouvelle salle...">
-                                                <span class="input-group-btn">
-                                                    <div class="input-group-btn">
-                                                        <button ng-click="addRoom()"
-                                                                class="btn btn-raised btn-sm btn-success"
-                                                                type="button">Ajouter salle</button>
-                                                    </div>
-                                                </span>
-                                            </div>
+                                        </span>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
 
-                                    <div class="col-md-6 center-block">
-                                        <div class="page-header">
-                                            <h2>Gestion des priorités</h2>
-                                        </div>
-                                        <div class="row-lg-4">
-                                            <i>Glissez-déposez pour prioriser les contraintes, par ordre
-                                                décroissant d'importance.</i>
-                                            <ul id="contraintesList" class="list-unstyled">
-                                                <li ng-repeat="p in planning.priorities | orderBy:'-weight'"
-                                                    class="panel panel-info">
-                                                    <div class="panel-heading" id="{{p.id}}">{{p.role}}
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                            <div class="col-md-7 center-block">
+                                <div class="page-header">
+                                    <h2>Gestion des priorités</h2>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <i>Glissez-déposez pour prioriser les contraintes, par ordre
+                                            décroissant d'importance.</i>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12 pull-right">
-                                            <ul class="list-inline pull-right">
-                                                <li>
-                                                    <button type="submit"
-                                                            class="btn btn-raised btn-success next-step"
-                                                            ng-click="submit()">Configurer
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <ul id="contraintesList" class="list-unstyled col-lg-12">
+                                            <li ng-repeat="p in planning.priorities | orderBy:'-weight'"
+                                                class="panel panel-info">
+                                                <div class="panel-heading" id="{{p.id}}">{{p.role}}
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
 
-                                        <flash-message duration="5000"></flash-message>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 pull-right">
+                                    <ul class="list-inline pull-right">
+                                        <li>
+                                            <button type="submit"
+                                                    class="btn btn-raised btn-success next-step"
+                                                    ng-click="submit()">Configurer
+                                            </button>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                    <!--<div class="row">-->
-                        <!--<div class="col-lg-12">-->
-                            <!--<div class="panel panel-default">-->
-                                <!--<div class="panel-body">-->
-                                    <!--<div class="page-header">-->
-                                        <!--<h2>Gestion des salles</h2>-->
-                                    <!--</div>-->
-                                    <!--<div class="row">-->
-                                        <!--<div class="col-lg-4">-->
-                                            <!--<i>Sélectionnez les salles parmis la liste ci dessous :</i>-->
-                                            <!--<div ng-dropdown-multiselect="" options="allRooms"-->
-                                                 <!--selected-model="selectedRooms"-->
-                                                 <!--translation-texts="settings">-->
-                                            <!--</div>-->
-                                            <!--{{ selectedRooms.id }}-->
-                                        <!--</div>-->
-                                        <!--<div class="col-lg-6">-->
-                                            <!--<i>Ajoutez une salle si elle n'y figure pas :</i>-->
-                                            <!--<div class="input-group">-->
-                                                <!--<input ng-model="newRoom.name" type="text"-->
-                                                       <!--class="form-control" placeholder="Nouvelle salle...">-->
-                                                <!--<span class="input-group-btn">-->
-                                                    <!--<div class="input-group-btn">-->
-                                                        <!--<button ng-click="addRoom()"-->
-                                                                <!--class="btn btn-raised btn-sm btn-success"-->
-                                                                <!--type="button">Ajouter salle</button>-->
-                                                    <!--</div>-->
-                                                <!--</span>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-
-                                    <!--<div class="page-header">-->
-                                        <!--<h2>Gestion des priorités</h2>-->
-                                    <!--</div>-->
-                                    <!--<div class="row">-->
-                                        <!--<div class="col-md-10">-->
-                                            <!--<i>Glissez-déposez pour prioriser les contraintes, par ordre-->
-                                                <!--décroissant d'importance.</i>-->
-                                            <!--<ul id="contraintesList" class="list-unstyled">-->
-                                                <!--<li ng-repeat="p in planning.priorities | orderBy:'-weight'"-->
-                                                    <!--class="panel panel-info">-->
-                                                    <!--<div class="panel-heading" id="{{p.id}}">{{p.role}}-->
-                                                    <!--</div>-->
-                                                <!--</li>-->
-                                            <!--</ul>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--<div class="row">-->
-                                        <!--<div class="col-md-12 pull-right">-->
-                                            <!--<ul class="list-inline pull-right">-->
-                                                <!--<li>-->
-                                                    <!--<button type="submit"-->
-                                                            <!--class="btn btn-raised btn-success next-step"-->
-                                                            <!--ng-click="submit()">Configurer-->
-                                                    <!--</button>-->
-                                                <!--</li>-->
-                                            <!--</ul>-->
-                                        <!--</div>-->
-                                        <!---->
-                                        <!--<flash-message duration="5000"></flash-message>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
             </div>
         </section>
     </div>
