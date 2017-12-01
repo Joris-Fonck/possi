@@ -17,7 +17,9 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
 		search : true,
 		language : {
     		search : "",
-    		searchPlaceholder : "Recherche ..."
+    		searchPlaceholder : "Recherche...",
+            zeroRecords: "Aucun planning pour cette recherche.",
+			emptyTable: "Vous n'avez aucun planning."
 		},
     };
 
@@ -30,8 +32,6 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
 	});
 
 	$http.get(backendURL + 'planning/list').success(function(data) {
-        $log.debug(data);
-
 		$scope.plannings = data;
 		$scope.connected = true;
 
@@ -54,31 +54,39 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
 		});
 	}
 
-    $scope.validate = function() {
-        $http.get(backendURL + 'planning/find/' + $scope.id).success(function(data) {
-            $scope.planning = data;
-            $scope.errorValidate = false;
-            $scope.errorNoParticipant = false;
-            $scope.errorNoRoom = false;
+    $scope.validate = function(id) {
+		$log.debug("test")
+        var fileURL = backendURL + 'planning/' + id + '/export';
 
-            if ($scope.participants == null || $scope.participants.length == 0) {
-                $scope.errorNoParticipant = true;
+        $http.get(backendURL + 'planning/find/' + id).success(function(data) {
+            $log.debug(data);
+            var planning = data;
+            var errorNoParticipant = false;
+            var errorNoRoom = false;
+
+            if (planning.participants == null || planning.participants.length == 0) {
+                errorNoParticipant = true;
                 return;
             }
 
-            if ($scope.planning.rooms == null || $scope.planning.rooms.length == 0) {
-                $scope.errorNoRoom = true;
+            if (planning.rooms == null || planning.rooms.length == 0) {
+                errorNoRoom = true;
                 return;
             }
 
-            $http.get(backendURL + 'planning/' + $scope.id + '/validate')
+            $http.get(backendURL + 'planning/' + id + '/validate')
                 .success(function(data) {
+                    $log.debug("test2");
+
                     console.log(data);
-                    document.location.href = $scope.fileURL;
+                    document.location.href = fileURL;
                 })
                 .error(function(data) {
                     console.log(data);
                 });
+        }).error(function(data) {
+            $log.debug(data);
+            $log.debug("Error !");
         });
     };
 });

@@ -13,7 +13,6 @@ angular.module('publicApp').controller('ParticipantCtrl', function ($scope, $loc
 
     $scope.id = $routeParams.idPlanning;
     $scope.uploadFileURL = backendURL + 'upload';
-    $scope.fileURL = backendURL + 'planning/' + $scope.id + '/export';
 
     //On vérifie que l'on est en train de créer un planning
     if($location.url().search("/create/") == -1) {

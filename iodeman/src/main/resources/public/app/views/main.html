@@ -51,7 +51,8 @@
                                class="btn btn-raised btn-sm btn-success hidden-xs">
                                 Saisir indisponibilités
                             </a>
-                            <a href="#/generatedPlanning/{{ planning.id }}" ng-click="validate()"
+                            <!-- href="#/generatedPlanning/{{ planning.id }}" -->
+                            <a ng-click="validate(planning.id)"
                                class="btn btn-raised btn-sm btn-success hidden-xs">
                                 Générer le planning
                             </a>
@@ -59,12 +60,10 @@
                                class="btn btn-raised btn-sm btn-warning hidden-xs">
                                 <i class="glyphicon glyphicon-user"></i>
                             </a>
-
                             <a href="#/planning/configuration/{{ planning.id }}"
                                class="btn btn-raised btn-sm btn-warning hidden-xs">
                                 <i class="glyphicon glyphicon-cog"></i>
                             </a>
-
                             <a data-toggle="tooltip" title="Voir le planning" ng-show="exported.indexOf(planning.id)!=-1"
                                class="btn btn-raised btn-sm btn-success" href="#/generatedPlanning/{{ planning.id }}">
                                 <i class="glyphicon glyphicon-calendar"></i>
