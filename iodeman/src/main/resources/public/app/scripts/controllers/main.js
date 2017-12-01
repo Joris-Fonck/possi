@@ -55,38 +55,31 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
 	}
 
     $scope.validate = function(id) {
-		$log.debug("test")
         var fileURL = backendURL + 'planning/' + id + '/export';
 
         $http.get(backendURL + 'planning/find/' + id).success(function(data) {
-            $log.debug(data);
             var planning = data;
-            var errorNoParticipant = false;
-            var errorNoRoom = false;
+            $scope.errorNoParticipant = false;
+            $scope.errorNoRoom = false;
 
             if (planning.participants == null || planning.participants.length == 0) {
-                errorNoParticipant = true;
+                $scope.errorNoParticipant = true;
                 return;
             }
 
             if (planning.rooms == null || planning.rooms.length == 0) {
-                errorNoRoom = true;
+                $scope.errorNoRoom = true;
                 return;
             }
 
             $http.get(backendURL + 'planning/' + id + '/validate')
                 .success(function(data) {
-                    $log.debug("test2");
-
                     console.log(data);
                     document.location.href = fileURL;
                 })
                 .error(function(data) {
                     console.log(data);
                 });
-        }).error(function(data) {
-            $log.debug(data);
-            $log.debug("Error !");
         });
     };
 });
