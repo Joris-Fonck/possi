@@ -27,9 +27,9 @@ public class FileUploadController {
 	
     @SuppressWarnings("finally")
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
-    public String handleFileUpload(@RequestParam("planningId") int planningId, @RequestParam("file") MultipartFile inputFile, @RequestParam(value="redirectURL", required=false) String redirectURL){    	
-    	
+    public String handleFileUpload(@RequestParam("planningId") int planningId, @RequestParam("file") MultipartFile inputFile, @RequestParam(value="redirectURL", required=false) String redirectURL){
     	session.teacherOnly();
+
     	// path to save the input file
     	String name = "/tmp/"+new DateTime();
     	String nameCsv = "";
@@ -47,8 +47,8 @@ public class FileUploadController {
                 stream.close();
             } catch (Exception e) {
             	e.printStackTrace();
-				return "redirect:/#/planning/create/participant/" + planningId + "?import=nok";
 
+				return "redirect:/#/planning/create/participant/" + planningId + "?import=nok";
 			}
         }
 
@@ -59,6 +59,7 @@ public class FileUploadController {
 			planningService.update(planning, planning.getName(), nameCsv, planning.getPeriod(), planning.getOralDefenseDuration(), planning.getOralDefenseInterlude(), planning.getLunchBreak(), planning.getDayPeriod(), planning.getNbMaxOralDefensePerDay(),planning.getRooms());
 		} catch (Exception e) {
 			e.printStackTrace();
+
 			return "redirect:/#/planning/create/participant/" + planningId + "?import=nok";
 			// affcher erreur de format
 		}

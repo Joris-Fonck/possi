@@ -198,7 +198,7 @@ public class PlanningServiceImpl implements PlanningService {
 		participantsImport.configure(personResolver);
 		Collection<Participant> participants = participantsImport.execute(file);
 
-		for(Participant p : participants){
+		for(Participant p : participants) {
 			participantDAO.persist(p);
 		}
 
@@ -210,7 +210,6 @@ public class PlanningServiceImpl implements PlanningService {
 	}
 
 	public Collection<Participant> findParticipants(Planning planning) {
-
 		return planningDAO.findParticipants(planning);
 	}
 
@@ -433,9 +432,10 @@ public class PlanningServiceImpl implements PlanningService {
 	public Collection<ParticipantDTO> findParticipantsAndUnavailabilitiesNumber(Planning planning) {
 		// retrieving of participants
 		Collection<Participant> participants = planningDAO.findParticipants(planning);
-		
+
 		// parsing for getting uids or person
 		Collection<String> uids = Lists.newArrayList();
+
 		for(Participant p : participants) {
 			if (!uids.contains(p.getStudent().getUid())) {
 				uids.add(p.getStudent().getUid());

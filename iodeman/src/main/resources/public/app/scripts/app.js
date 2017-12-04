@@ -59,6 +59,11 @@ angular.module('publicApp', [
             controller: 'ConfigurationCtrl',
             controllerAs: 'configurationCtrl'
         })
+        .when('/planning/check/:idPlanning', {
+            templateUrl: 'app/views/planningCheckmark.html',
+            controller: '',
+            controllerAs: ''
+        })
         .when('/planning/draft/:idPlanning', {
             templateUrl: 'app/views/draft.html',
             controller: 'DraftCtrl',

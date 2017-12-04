@@ -22,14 +22,11 @@ public class ParticipantsCSVImport implements ParticipantsImport {
 	}
 	
 	public Collection<Participant> execute(File file) throws Exception {
-		
 		Collection<Participant> participants = new ArrayList<Participant>();
 		
 		BufferedReader br = null;
         String line = "";
         String cvsSplitBy = ";";
-        
-        //System.err.println("debut");
         
         try {
             br = new BufferedReader(new FileReader(file));
@@ -61,39 +58,27 @@ public class ParticipantsCSVImport implements ParticipantsImport {
     			System.err.println(email);
     			System.err.println(normedEmail);
     			Person student = personResolver.resolve(normedEmail);
-    			
-    			if(student == null) {
-    				student = new Person();
-    				student.setEmail(normedEmail);
-    			}
-    			
-    			//System.err.println("1");
-    			
-    			// following teacher
-    			email = row[4].trim();
-    			normedEmail = normalize(email);
-    			Person followingTeacher = personResolver.resolve(normedEmail);
-    			
-    			if(followingTeacher == null) {
-    				followingTeacher = new Person();
-    				followingTeacher.setEmail(normedEmail);
-    			}
-    			
-    			String tutorFullName = row[5].trim();
-    			
-    			//System.err.println("2");
-				
-				participant.setTutorFullName(tutorFullName);
-				// Compagny
-				String company = row[3].trim();
-				participant.setCompany(company);
-    			
-    			participant.setStudent(student);
-    			participant.setFollowingTeacher(followingTeacher);
-    			
-    			participants.add(participant);
-    			
-    			//System.err.println("3");
+
+				if(student != null) {
+					// following teacher
+					email = row[4].trim();
+					normedEmail = normalize(email);
+					Person followingTeacher = personResolver.resolve(normedEmail);
+
+					if (followingTeacher != null) {
+						String tutorFullName = row[5].trim();
+
+						participant.setTutorFullName(tutorFullName);
+						// Compagny
+						String company = row[3].trim();
+						participant.setCompany(company);
+
+						participant.setStudent(student);
+						participant.setFollowingTeacher(followingTeacher);
+
+						participants.add(participant);
+					}
+				}
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -108,8 +93,6 @@ public class ParticipantsCSVImport implements ParticipantsImport {
                 }
             }
         }
-        
-        //System.err.println("fin");
 		
         return participants;
 	}

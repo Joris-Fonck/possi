@@ -58,21 +58,23 @@
                         <td>{{ planning.period.from | date:'dd/MM/yyyy' }}</td>
                         <td>{{ planning.period.to | date:'dd/MM/yyyy' }}</td>
                         <td>
-                            <a id="btn-indispo" href="#/unavailabilities/{{ planning.id }}"
+                            <a data-toggle="tooltip" title="Indisponibilités" id="btn-indispo" href="#/unavailabilities/{{ planning.id }}"
                                class="btn btn-raised btn-sm btn-success hidden-xs">
                                 Saisir indisponibilités
                             </a>
-                            <!-- href="#/generatedPlanning/{{ planning.id }}" -->
-                            <a ng-click="validate(planning.id)"
-                               class="btn btn-raised btn-sm btn-success hidden-xs">
+                            <a data-toggle="tooltip" title="Générer le planning" ng-click="validate(planning.id)"
+                               class="btn btn-raised btn-sm btn-success hidden-xs"
+                               ng-hide="planning.admin.uid != user.uid">
                                 Générer le planning
                             </a>
-                            <a href="#/planning/participant/{{ planning.id }}"
-                               class="btn btn-raised btn-sm btn-warning hidden-xs">
+                            <a data-toggle="tooltip" title="Participants" href="#/planning/participant/{{ planning.id }}"
+                               class="btn btn-raised btn-sm btn-warning hidden-xs"
+                               ng-hide="planning.admin.uid != user.uid">
                                 <i class="glyphicon glyphicon-user"></i>
                             </a>
-                            <a href="#/planning/configuration/{{ planning.id }}"
-                               class="btn btn-raised btn-sm btn-warning hidden-xs">
+                            <a data-toggle="tooltip" title="Configuration" href="#/planning/configuration/{{ planning.id }}"
+                               class="btn btn-raised btn-sm btn-warning hidden-xs"
+                               ng-hide="planning.admin.uid != user.uid">
                                 <i class="glyphicon glyphicon-cog"></i>
                             </a>
                             <a data-toggle="tooltip" title="Voir le planning" ng-show="exported.indexOf(planning.id)!=-1"

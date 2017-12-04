@@ -72,9 +72,6 @@ public class PlanningController {
     ) {
 
         session.teacherOnly();
-
-        //URL_TEST : http://iode-man-debian.istic.univ-rennes1.fr:8080/iodeman/planning/create?name=toto&periodStart=2015-01-01&periodEnd=2015-01-07&oralDefenseDuration=60&oralDefenseInterlude=15&lunchBreakStart=12:15&lunchBreakEnd=14:00&dayPeriodStart=08:00&dayPeriodEnd=18:15&nbMaxOralDefensePerDay=6&rooms=i51
-
         // check if the current user is a teacher
         Person user = session.getUser();
         //Validate.notNull(user);
@@ -184,7 +181,6 @@ public class PlanningController {
 
     @RequestMapping("/{id}/participants/unavailabilities")
     public Collection<ParticipantDTO> getParticipantsAndUnavailabilitiesNumber(@PathVariable("id") Integer id) {
-        System.out.println("TESTSTTTTT");
         session.teacherOnly();
 
         Planning planning = planningService.findById(id);
@@ -247,9 +243,7 @@ public class PlanningController {
 
     @RequestMapping(value = "/{id}/delete")
     public void deletePlanning(@PathVariable("id") Integer id) {
-        System.out.println(id);
         Planning planning = planningService.findById(id);
-        System.out.println(planning);
         Validate.notNull(planning);
 
         // check if the current user is the admin of this planning

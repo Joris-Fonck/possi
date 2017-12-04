@@ -123,7 +123,11 @@ angular.module('publicApp').controller('ConfigurationCtrl', function ($scope, $l
                     rooms: roomsNames
                 }
             }).success(function() {
-                location.href = "/";
+                if($location.url().search("/create/") == -1) {
+                    location.href = "#/";
+                } else {
+                    location.href = backendURL + "#/planning/check/" + $scope.id;
+                }
             });
         });
 

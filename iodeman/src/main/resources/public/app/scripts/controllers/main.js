@@ -9,7 +9,6 @@
  */
 angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope, $http, $log, backendURL, Auth, $sessionStorage) {
 	$.material.init();
-	$scope.connected = false;
 
     $scope.dtOptions = {
     	info : false,
@@ -20,7 +19,7 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
     		searchPlaceholder : "Recherche...",
             zeroRecords: "Aucun planning pour cette recherche.",
 			emptyTable: "Vous n'avez aucun planning."
-		},
+		}
     };
 
 	$http.get(backendURL + 'plannings/exported').success(function(data) {
@@ -36,6 +35,8 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
 		$scope.connected = true;
 
 		$("#home-spinner").remove();
+	}).error(function() {
+        $scope.connected = false;
 	});
 
 	$scope.closeHomeInfo = function() {
