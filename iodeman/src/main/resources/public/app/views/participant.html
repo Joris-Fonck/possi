@@ -113,27 +113,22 @@
                                     <tbody>
                                     <tr ng-repeat="participant in participants">
                                         <td>{{ $index+1 }}</td>
-                                        <td>
-                                            {{ participant.student.person.firstName }}
-                                            {{participant.student.person.lastName }}
-                                        </td>
+                                        <td>{{ participant.student.person.firstName }} {{ participant.student.person.lastName }}</td>
                                         <td ng-style="participant.student.unavailabilitiesNumber !== 0 && {'background-color': '#ccdcff'}">
                                             {{ participant.tutorFullName }} - {{ participant.company }}
-                                            <button ng-click="showUnavailabilities(participant.student.person)"
+                                            <button ng-click="showUnavailabilities(participant, participant.student.person.role)"
                                                     data-toggle="modal" data-target="#modalUnavailabilities"
                                                     style="float:right" class="label label-default">
-                                                {{participant.student.unavailabilitiesNumber }}
-                                                indisponibilité(s)
+                                                {{participant.student.unavailabilitiesNumber }} indisponibilité(s)
                                             </button>
                                         </td>
                                         <td ng-style="participant.followingTeacher.unavailabilitiesNumber !== 0 && {'background-color': '#ccdcff'}">
                                             {{ participant.followingTeacher.person.firstName }}
                                             {{participant.followingTeacher.person.lastName }}
-                                            <button ng-click="showUnavailabilities(participant.followingTeacher.person)"
+                                            <button ng-click="showUnavailabilities(participant, participant.followingTeacher.person.role)"
                                                     data-toggle="modal" data-target="#modalUnavailabilities"
                                                     style="float:right" class="label label-default">
-                                                {{participant.followingTeacher.unavailabilitiesNumber }}
-                                                indisponibilité(s)
+                                                {{participant.followingTeacher.unavailabilitiesNumber }} indisponibilité(s)
                                             </button>
                                         </td>
                                     </tr>
@@ -149,7 +144,15 @@
                                             <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close"><span aria-hidden="true">&times;</span>
                                             </button>
-                                            <h3 class="panel-title">Indisponibilités de {{currentUser}}</h3>
+                                            <h3 class="panel-title" ng-if="role == 'PROF'">
+                                                Indisponibilités de
+                                                {{currentUser.followingTeacher.person.firstName}}
+                                                {{currentUser.followingTeacher.person.lastName}}
+                                            </h3>
+                                            <h3 class="panel-title" ng-if="role != 'PROF'">
+                                                Indisponibilités de
+                                                {{currentUser.tutorFullName}}
+                                            </h3>
                                         </div>
                                         <div class="panel-body" style="overflow-x: scroll;">
                                             <table class="table" style="text-align: center;">
