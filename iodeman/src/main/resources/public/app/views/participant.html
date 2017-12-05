@@ -4,33 +4,30 @@
             <div class="wizard">
                 <div class="wizard-inner">
                     <div class="connecting-line"></div>
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="disabled">
-                            <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab"
-                               title="Création du planning">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation">
+                            <a href="" title="Création du planning" onClick="return false;">
                                 <span class="round-tab">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </span>
                             </a>
                         </li>
                         <li role="presentation" class="active">
-                            <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab"
-                               title="Insertion des participants">
+                            <a href="" title="Insertion des participants" onClick="return false;">
                                 <span class="round-tab">
                                     <i class="glyphicon glyphicon-user"></i>
                                 </span>
                             </a>
                         </li>
-                        <li role="presentation" class="disabled">
-                            <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"
-                               title="Configuration du planning">
+                        <li role="presentation">
+                            <a href="" title="Configuration du planning" onClick="return false;">
                                 <span class="round-tab">
                                     <i class="glyphicon glyphicon-cog"></i>
                                 </span>
                             </a>
                         </li>
-                        <li role="presentation" class="disabled">
-                            <a href="#step4" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                        <li role="presentation">
+                            <a href="" title="Complete" onClick="return false;">
                                 <span class="round-tab">
                                     <i class="glyphicon glyphicon-check"></i>
                                 </span>
@@ -40,18 +37,17 @@
                 </div>
 
                 <div ng-controller="ParticipantCtrl">
-                    <div class="row back_arrow">
-                        <div class="col-md-12">
-                            <h1 class="page-head-line">
-                                <a href="/#/">
-                                    <button type="button" class="btn btn-primary">
-                                        <i class="glyphicon glyphicon-arrow-left"></i>
-                                    </button>
-                                </a>
-                                {{ planning.name }}
-                            </h1>
-                        </div>
+                    <div class="back_arrow">
+                        <h1 class="page-head-line">
+                            <a href="/#/">
+                                <button type="button" class="btn btn-primary">
+                                    <i class="glyphicon glyphicon-arrow-left"></i>
+                                </button>
+                            </a>
+                            {{ planning.name }}
+                        </h1>
                     </div>
+
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                             <div ng-show="errorImport" class="alert alert-danger" role="alert">
@@ -189,7 +185,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" ng-hide="noParticipants">
+                            <div class="row" ng-hide="noParticipants || showConfigButton">
                                 <div class="col-md-12 pull-right">
                                     <ul class="list-inline pull-right">
                                         <li>

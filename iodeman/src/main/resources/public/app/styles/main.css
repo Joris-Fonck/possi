@@ -30,6 +30,19 @@ body {
   padding-bottom: 19px;
 }
 
+.back_arrow {
+    background-color: #009688;
+}
+
+.back_arrow > h1 {
+    color: white;
+    padding: 5px;
+}
+
+.back_arrow > h1 > a > button {
+    color: white !important;
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;
@@ -59,13 +72,13 @@ body {
     background-color: #999999;
 }
 
-#DataTables_Table_0_filter input {
+[id^=DataTables_Table][id$=filter] input {
     border-radius: 8px;
     background-color: white;
     color: #454545;
 }
 
-#DataTables_Table_0_filter input::placeholder {
+[id^=DataTables_Table][id$=filter] input::placeholder {
     color: #BDBDBD;
 }
 

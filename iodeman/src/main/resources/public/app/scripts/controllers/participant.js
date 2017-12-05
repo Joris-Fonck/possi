@@ -29,6 +29,7 @@ angular.module('publicApp').controller('ParticipantCtrl', function ($scope, $loc
         $scope.user = data;
         $http.get(backendURL + 'planning/find/' + $scope.id).success(function(data) {
             $scope.planning = data;
+
             $timeout(verifyAdmin(), 100);
         });
 
@@ -51,6 +52,10 @@ angular.module('publicApp').controller('ParticipantCtrl', function ($scope, $loc
 
             if($scope.participants.length > 0) {
                 $scope.showImportButton = false;
+
+                if($location.url().search("/create/") == -1) {
+                    $scope.showConfigButton = false;
+                }
             }
         })
         .error(function() {

@@ -90,12 +90,12 @@ angular.module('publicApp', [
             controllerAs: 'duplicatePlanningCtrl'
         })
         .when('/duplicateDraft/:idPlanning', {
-            templateUrl: 'app/views/planning.html',
+            templateUrl: 'app/views/draft.html',
             controller: 'DuplicateDraftCtrl',
             controllerAs: 'duplicateDraftCtrl'
         })
         .when('/planning/switchDraft/:idDraft', {
-            templateUrl: 'app/views/planning.html',
+            templateUrl: 'app/views/draft.html',
             controller: 'SwitchDraftCtrl',
             controllerAs: 'switchDraftCtrl'
         })
