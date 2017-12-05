@@ -4,15 +4,16 @@
 <div class="fixed row">
     <div class="col-md-12">
         <a href="/#/">
-            <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left"></i></button>
+            <button type="button" class="btn btn-primary">
+                <i class="glyphicon glyphicon-arrow-left"></i>
+            </button>
         </a>
-        <button type="text" class="btn btn-raised btn-sm btn-success hidden-xs" ng-click="printIt()">Télécharger le
-            planning
+        <button type="text" class="btn btn-raised btn-sm btn-success hidden-xs" ng-click="printIt()">
+            Télécharger le planning
         </button>
 
         <span class="titre">{{name}}</span>
         <div class="csv_file_name">Fichier csv : {{csv_file}}</div>
-
     </div>
 </div>
 
@@ -37,7 +38,6 @@
 
 <div ng-hide="error" class="panel panel-default planning visible-xs">
     <table class="table">
-
         <tbody ng-repeat="(key, jour) in creneaux.creneaux | orderBy:key">
 
         <tr>
@@ -67,9 +67,6 @@
                 </td>
             </div>
         </tr>
-
         </tbody>
     </table>
-
-
 </div>

@@ -75,20 +75,20 @@ angular.module('publicApp')
 
                      html +=  '<td class="odd horaire" data-periode="'+horaire[0].periode+'">'+horaire[0].horaire+'</td>';
 
-
                      horaire.sort(function(a, b) {
                          return a.salle - b.salle
                      });
-                     i=0;
+                     i = 0;
                      current_soutenance = 0;
                      angular.forEach(creneaux.salles, function(truc, salle_num){
 
                          var class_name = "";
                          if(i % 2 == 0){
                              class_name = "even";
-                         }else{
+                         } else {
                              class_name = "odd";
                          }
+
                          html += '<td class="'+class_name+'">';
                          if(typeof horaire[current_soutenance] != 'undefined' && typeof horaire[current_soutenance].student != 'undefined' && horaire[current_soutenance].salle == salle_num+1){
                              console.log(horaire[current_soutenance].student.name)
@@ -98,7 +98,7 @@ angular.module('publicApp')
                              html += '<div class="rec_etud creneau_element creneau_draft"><p>'
                                  + capit(etn(horaire[current_soutenance].student.name), true)
                                  + '</p></div>'
-                                 + '<div  class="rec_prof1 creneau_element creneau_draft"><p>'
+                                 + '<div class="rec_prof1 creneau_element creneau_draft"><p>'
                                  + capit(etn(horaire[current_soutenance].student.enseignant.name), true)
                                  + '</p></div>';
                                  if(typeof horaire[current_soutenance].candide != "undefined") {
@@ -129,45 +129,42 @@ angular.module('publicApp')
     }
 
 }).directive('myRepeatDirectivePlanning', function () {
-        return function (scope) {
-            if (scope.$last) {
-            	//alert("fin");
-                heights = new Array();
-                widths = new Array();
-                $(".creneau_element").each(function ()
-                {
-                    heights.push(this.offsetHeight);
-                    widths.push(this.offsetWidth);
-                });
+    return function (scope) {
+        if (scope.$last) {
+            //alert("fin");
+            heights = new Array();
+            widths = new Array();
+            $(".creneau_element").each(function ()
+            {
+                heights.push(this.offsetHeight);
+                widths.push(this.offsetWidth);
+            });
 
-                maxHeight = Math.max.apply(null, heights);
-                maxWidth = Math.max.apply(null, widths);
+            maxHeight = Math.max.apply(null, heights);
+            maxWidth = Math.max.apply(null, widths);
 
-                $('.creneau_element').each(function (){
-                    $(this).css("height", maxHeight+"px");
-                    $(this).css("line-height", maxHeight+"px");
-                    $(this).css( "width", maxWidth+"px");
+            $('.creneau_element').each(function (){
+                $(this).css("height", maxHeight+"px");
+                $(this).css("line-height", maxHeight+"px");
+                $(this).css( "width", maxWidth+"px");
 
-                });
+            });
 
-                // 32 = padding des div
-                // 70 = largeur de la colonne horaire
-                nb_colonne = $('.planning.desktop').find('thead').find('th').length;
-                new_width = (nb_colonne-1)*(maxWidth*4 + 35) + 70;
-                if (new_width > 1000){
-                    $('.planning.desktop')[0].style.width = new_width +"px";
+            // 32 = padding des div
+            // 70 = largeur de la colonne horaire
+            nb_colonne = $('.planning.desktop').find('thead').find('th').length;
+            new_width = (nb_colonne-1)*(maxWidth*4 + 35) + 70;
+            if (new_width > 1000){
+                $('.planning.desktop')[0].style.width = new_width +"px";
 
-                }
-
-                $('.room_name').each(function(){
-                    $(this).css( "width", (maxWidth*4 + 32)+"px");
-                })
-
-                //155 = taille du header plus les boutons
-                $('#printArea tbody').css("height", (window.innerHeight-155)+"px");
             }
-        };
-    });
 
+            $('.room_name').each(function(){
+                $(this).css( "width", (maxWidth*4 + 32)+"px");
+            })
 
-
+            //155 = taille du header plus les boutons
+            $('#printArea tbody').css("height", (window.innerHeight-155)+"px");
+        }
+    };
+});

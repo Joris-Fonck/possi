@@ -27,10 +27,10 @@
             <td>{{ draft.period.from | date:'dd/MM/yyyy' }}</td>
             <td>{{ draft.period.to | date:'dd/MM/yyyy' }}</td>
             <td>
-                <a href="#/planning/switchDraft/{{ draft.id }}" class="btn btn-raised btn-sm btn-success">
+                <a href="#/planning/switchDraft/{{ draft.id }}" class="btn btn-raised btn-sm btn-success" title="Défini ce ">
                     Basculer en PLAN-REF
                 </a>
-                <a data-toggle="tooltip" title="Modifier le draft" class="btn btn-raised btn-sm btn-info" href="#/generatedDraft/{{ draft.id }}"><i class="glyphicon glyphicon-edit"></i></a>
+                <a data-toggle="tooltip" title="Modifier le draft" class="btn btn-raised btn-sm btn-info" href="#/generatedDraft/{{ planning.id }}"><i class="glyphicon glyphicon-edit"></i></a>
                 <a data-toggle="tooltip" title="Créer un draft" ng-show="exported.indexOf(draft.id)!=-1" ng-hide="planning.admin.uid != user.uid" href="#/duplicateDraft/{{ draft.id }}" class="btn btn-raised btn-sm btn-info hidden-xs">
                     <i class="glyphicon glyphicon-duplicate"></i>
                 </a>
@@ -40,15 +40,4 @@
         </tr>
         </tbody>
     </table>
-    <div class="row">
-        <div class="col-md-12 pull-right">
-            <ul class="list-inline pull-right">
-                <li>
-                    <button type="submit" class="btn btn-raised btn-success next-step"
-                            ng-click="submit()">Configurer
-                    </button>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>

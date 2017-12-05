@@ -159,44 +159,36 @@ public class FileDownloadController {
 		Validate.notNull(planning);
 
 		Map<Integer, List<Creneau>> creneaux = planningService.exportJSON(planning);
-
-
 		PlanningSplitter splitter = new PlanningSplitterImpl();
-		
 		List<TimeBox> timeboxes = splitter.execute(planning);
 		Map<Long, Integer> dico = new HashMap<>();
 
 		for (int d = 0; d< timeboxes.size(); d++) {
 			dico.put(timeboxes.get(d).getFrom().getTime(), d);
-
 		}
 
 		for(Map.Entry<Long, Integer> entry : dico.entrySet()) {
 			System.out.println(entry.getKey() + "---------" + entry.getValue());
 			// traitements
 		}
-
 		
 		JSONObject ret = new JSONObject();
-
 		JSONObject obj1 = new JSONObject();
 		
 		ret.put("salles", planning.getRooms());
 		ret.put("priorités", planning.getPriorities());
 		
 		Date d1 = planning.getPeriod().getFrom();
-		
 		List<List<Creneau>> day = new ArrayList<List<Creneau>>();
 		
 		int nbPeriodeParJour = getNbDePeriodesParJour(timeboxes);
-		
-		int dayPlus = 0;
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(d1);
 
 		UnavailabilityService unavailabilityService = new UnavailabilityServiceImpl();
 		Map<String, List<Integer>> unav = new HashMap<>();
+
 		for(int i = 0; i < creneaux.size(); i++) {
 
 			//recherche indispo
@@ -209,17 +201,17 @@ public class FileDownloadController {
 				new_creneau.setHoraire(timebox.getFrom().getDay()+" "+timebox.getFrom().getHours()+" "+ timebox.getFrom().getMinutes());
 
 				creneaux.get(i).add(new_creneau);
-
-			}else{
-				for(int j = 0; j < creneaux.get(i).size(); j++){
-
+			} else {
+				for(int j = 0; j < creneaux.get(i).size(); j++) {
 					List<Date> indispos = unavailabilityService.getUnavailabilities(planning.getRef_id(), creneaux.get(i).get(j));
 					List<Integer> periodes = new ArrayList<>();
-					if(!indispos.isEmpty()){
+
+					if(!indispos.isEmpty()) {
 						for (Date date_indispo: indispos ) {
 							periodes.add(dico.get(date_indispo.getTime()));
 							System.out.println(date_indispo.getTime());
 						}
+
 						unav.put(creneaux.get(i).get(j).getStudent().getName(), periodes);
 					}
 				}
@@ -274,20 +266,19 @@ public class FileDownloadController {
 
 		int nbPeriodeParJour = getNbDePeriodesParJour(timeboxes);
 
-		int dayPlus = 0;
-
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(d1);
 
 		for(int i = 0; i < creneaux.size(); i++) {
-
 			day.add(creneaux.get(i));
+
 			if((i+1)%nbPeriodeParJour==0) {
 				obj1.put(""+cal.getTimeInMillis(), day);
 				if(cal.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
 					cal.add(Calendar.DAY_OF_MONTH, 1);
 					cal.add(Calendar.DAY_OF_MONTH, 1);
 				}
+				
 				cal.add(Calendar.DAY_OF_MONTH, 1);
 				day.clear();
 			}

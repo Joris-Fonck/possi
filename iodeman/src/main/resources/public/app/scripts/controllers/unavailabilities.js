@@ -105,7 +105,6 @@ angular.module('publicApp').controller('UnavailabilitiesCtrl', function ($scope,
 
                 return from < fromLunchBreak;
             } else {
-                $log.debug("ELSE!");
                 return true;
             }
 
@@ -120,7 +119,6 @@ angular.module('publicApp').controller('UnavailabilitiesCtrl', function ($scope,
 
                 return to >= toLunchBreak;
             } else {
-                $log.debug("ELSE!");
                 return true;
             }
         };

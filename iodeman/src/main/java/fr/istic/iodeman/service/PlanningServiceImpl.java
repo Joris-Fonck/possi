@@ -244,6 +244,7 @@ public class PlanningServiceImpl implements PlanningService {
 		int idPlanning = plan.getId();
 		Map<Integer, List<Creneau>> planning = null;
 		File f = new File(PERSIST_PATH + "/" + idPlanning + "/planning.ser");
+
 		if(f.exists()) {
 			try(
 					InputStream f1 = new FileInputStream(PERSIST_PATH + "/" + idPlanning + "/planning.ser");

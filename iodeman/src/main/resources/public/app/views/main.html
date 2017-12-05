@@ -22,8 +22,10 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-head-line">Mes plannings
-                <a ng-hide="user.role != 'PROF'" class="btn btn-raised btn-sm btn-success hidden-xs" href="#/planning/create">
-                <i class="fa fa-dashboard "></i>Créer planning</a>
+                <a ng-hide="user.role != 'PROF'"
+                   class="btn btn-raised btn-sm btn-success hidden-xs"
+                   href="#/planning/create">Créer planning
+                </a>
             </h1>
         </div>
     </div>
@@ -67,25 +69,34 @@
                                ng-hide="planning.admin.uid != user.uid">
                                 Générer le planning
                             </a>
-                            <a data-toggle="tooltip" title="Participants" href="#/planning/participant/{{ planning.id }}"
+                            <a data-toggle="tooltip" title="Voir le planning" ng-show="exported.indexOf(planning.id)!=-1"
+                               class="btn btn-raised btn-sm btn-success"
+                               href="#/generatedPlanning/{{ planning.id }}">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </a>
+                            <a data-toggle="tooltip" title="Participants"
+                               href="#/planning/participant/{{ planning.id }}"
                                class="btn btn-raised btn-sm btn-warning hidden-xs"
                                ng-hide="planning.admin.uid != user.uid">
                                 <i class="glyphicon glyphicon-user"></i>
                             </a>
-                            <a data-toggle="tooltip" title="Configuration" href="#/planning/configuration/{{ planning.id }}"
+                            <a data-toggle="tooltip" title="Configuration"
+                               href="#/planning/configuration/{{ planning.id }}"
                                class="btn btn-raised btn-sm btn-warning hidden-xs"
                                ng-hide="planning.admin.uid != user.uid">
                                 <i class="glyphicon glyphicon-cog"></i>
                             </a>
-                            <a data-toggle="tooltip" title="Voir le planning" ng-show="exported.indexOf(planning.id)!=-1"
-                               class="btn btn-raised btn-sm btn-success" href="#/generatedPlanning/{{ planning.id }}">
-                                <i class="glyphicon glyphicon-calendar"></i>
-                            </a>
                             <a data-toggle="tooltip" title="Créer un draft"
-                               ng-show="exported.indexOf(planning.id)!=-1 && planning.admin.uid == user.uid"
+                               ng-show="exported.indexOf(planning.id) != -1 && planning.admin.uid == user.uid"
                                href="#/duplicatePlanning/{{ planning.id }}"
                                class="btn btn-raised btn-sm btn-info hidden-xs">
-                                <i class="glyphicon glyphicon-duplicate"></i>
+                                <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Draft
+                            </a>
+                            <a data-toggle="tooltip" title="Gérer mes drafts"
+                               ng-show="exported.indexOf(planning.id) != -1 && planning.admin.uid == user.uid"
+                               href="#/planning/draft/{{ planning.id }}"
+                               class="btn btn-raised btn-sm btn-info hidden-xs">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;Draft
                             </a>
                             <a data-toggle="tooltip" title="Supprimer le planning"
                                confirmed-click="remove({{ planning.id }})"
