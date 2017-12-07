@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div ng-show="error" class="pangel panel-danger">
+<div ng-show="error" class="panel panel-danger">
     Le planning n'a pas encore été généré par l'administrateur.
 </div>
 
@@ -25,7 +25,7 @@
     <table id="printArea" class="table fixed_header">
         <thead>
         <tr>
-            <th class="odd horaire">Horaire</th>
+            <th class="horaire">Horaire</th>
             <th class="room_name" ng-repeat="room in creneaux.salles" ng-class="{'even':$even, 'odd':$odd}"
                 my-repeat-directive-planning>Salle {{room.name}}
             </th>
@@ -45,23 +45,23 @@
         </tr>
 
         <tr ng-repeat="horaire in jour" ng-show="horaire[0].horaire.length>0">
-
             <td class="odd">{{horaire[0].horaire}}</td>
             <div ng-repeat="room in creneaux.salles track by $index" ng-class="{'even':$even, 'odd':$odd}">
-
-
                 <td ng-repeat="creneau in horaire" ng-class="{'even':$even, 'odd':$odd}" my-repeat-directive-planning>
                     <strong>{{creneaux.salles[$index].name}}</strong>
                     <div id="block_container col-lg-12 visible-xs">
-                        <!--<div ng-repeat="room in creneaux.salles"  ng-class="{'even':$even, 'odd':$odd}" class="visible-xs"><strong>{{creneaux.salles[0].name | capitalize:true}}</strong></div>-->
-                        <div class="rec_etud col-lg-2 col-lg-offset-1 visible-xs" id="bloc1"><strong>{{creneau.student.name
-                            | emailToName | capitalize:true}}</strong></div>
-                        <div class="rec_tut col-lg-2 col-lg-offset-1 visible-xs" id="bloc2"><strong>{{creneau.tuteur.name
-                            | capitalize:true}} </strong></div>
-                        <div class="rec_prof1 col-lg-2 col-lg-offset-1 visible-xs" id="bloc3"><strong>
-                            {{creneau.enseignant.name | emailToName | capitalize:true}} </strong></div>
-                        <div class="rec_prof2 col-lg-2 col-lg-offset-1 visible-xs" id="bloc4"><strong>{{creneau.candide.name
-                            | emailToName | capitalize:true}} </strong></div>
+                        <div class="rec_etud col-lg-2 col-lg-offset-1 visible-xs" id="bloc1">
+                            <strong>{{creneau.student.name | emailToName | capitalize:true}}</strong>
+                        </div>
+                        <div class="rec_tut col-lg-2 col-lg-offset-1 visible-xs" id="bloc2">
+                            <strong>{{creneau.tuteur.name | capitalize:true}}</strong>
+                        </div>
+                        <div class="rec_prof1 col-lg-2 col-lg-offset-1 visible-xs" id="bloc3">
+                            <strong>{{creneau.enseignant.name | emailToName | capitalize:true}}</strong>
+                        </div>
+                        <div class="rec_prof2 col-lg-2 col-lg-offset-1 visible-xs" id="bloc4">
+                            <strong>{{creneau.candide.name | emailToName | capitalize:true}}</strong>
+                        </div>
                     </div>
 
                 </td>

@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="app/styles/drag_drop.css" media="all">
 <a href="/#/">
-    <button type="button" class="btn btn-primary"><i class="glyphicon glyphicon-arrow-left"></i></button>
+    <button type="button" class="btn btn-primary">
+        <i class="glyphicon glyphicon-arrow-left"></i>
+    </button>
 </a>
 <span class="titre">{{name}}</span>
 
@@ -10,10 +12,10 @@
     <button type="button" class="btn btn-raised btn-sm btn-success" ng-click="save_switch()">Enregistrer et basculer en
         PLAN-REF
     </button>
-    <button ng-hide="error" type="button" id="rotate" class="btn btn-primary show_hide_btn"
+    <!-- <button ng-hide="error" type="button" id="rotate" class="btn btn-primary show_hide_btn"
             onclick="show_hide_creneaux()"
             data-toggle="tooltip" title="Masquer les créneaux vides">
-    </button>
+    </button> -->
 </div>
 <div class="csv_file_name">Fichier csv : {{csv_file}}</div>
 
@@ -27,7 +29,7 @@
     <table id="printArea" class="table fixed_header">
         <thead>
         <tr>
-            <th class="odd">Horaire</th>
+            <th class="odd horaire">Horaire</th>
             <th ng-repeat="room in creneaux.salles" ng-class="{'even':$even, 'odd':$odd}" class="room_name"
                 my-repeat-directive-draft>Salle {{room.name}}
             </th>
@@ -43,8 +45,6 @@
 
             <td ng-repeat="room in creneaux.salles" ng-class="{'even':$even, 'odd':$odd}" class="creneau"
                 my-repeat-directive>
-
-
             </td>
         </tr> -->
         </tbody>
@@ -56,9 +56,9 @@
     <button type="button" class="btn btn-raised btn-sm btn-success" ng-click="save_switch()">Enregistrer et basculer en
         PLAN-REF
     </button>
-    <button ng-hide="error" type="button" id="rotate" class="btn btn-primary show_hide_btn"
+    <!-- <button ng-hide="error" type="button" id="rotate" class="btn btn-primary show_hide_btn"
             onclick="show_hide_creneaux()"
             data-toggle="tooltip" title="Masquer les créneaux vides">
-    </button>
+    </button> -->
 </div>
 <script src="../app/scripts/assets/generatedDraft.js"></script>

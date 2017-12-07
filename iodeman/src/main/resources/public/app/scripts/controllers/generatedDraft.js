@@ -1,4 +1,4 @@
-angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $window, $http, backendURL, Auth, $routeParams, $filter, Flash, $location) {
+angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $log, $window, $http, backendURL, Auth, $routeParams, $filter, Flash, $location) {
     $scope.id = $routeParams.idPlanning;
     $scope.id_div = -1;
 
@@ -54,7 +54,7 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
                 if(horaire.length > 0) {
                     html += '<tr class="line_creneaux">';
 
-                    html += '<td class="odd horaire" style="min-width: 67px" data-periode="'+horaire[0].periode+'">'+horaire[0].horaire+'</td>';
+                    html += '<td class="odd horaire" data-periode="'+horaire[0].periode+'">'+horaire[0].horaire+'</td>';
 
                     horaire.sort(function(a, b) {
                         return a.salle - b.salle
@@ -70,7 +70,7 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
                         } else {
                             class_name = "odd";
                         }
-                        html += '<td class="'+class_name+'" style="min-width: 512px">';
+                        html += '<td class="'+class_name+'">';
 
                         if(typeof horaire[current_soutenance] != 'undefined' && typeof horaire[current_soutenance].student != 'undefined' && horaire[current_soutenance].salle == salle_num+1){
                             html += '<div class="event creneau" draggable="true" id="' + div_id + '" data-student="'+horaire[current_soutenance].student.name+'">';
@@ -119,11 +119,13 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
             $scope.origin_position = $(this).parent('td')[0];
             var periodes = $scope.creneaux.indispos[$(this).attr("data-student")];
 
+            $scope.currentTarget = event.currentTarget.parentNode.parentNode;
+
             $('.unavailable_drop').each(function () {
                 $(this).removeClass('unavailable_drop');
             });
-            if(typeof periodes != 'undefined'){
 
+            if(typeof periodes != 'undefined') {
                 periodes.forEach(function(key, value){
                     $('[data-periode= '+key+']').parent().children('td').addClass("unavailable_drop_design unavailable_drop");
                 });
@@ -135,40 +137,58 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
 
             if(!($(event.target).hasClass('unavailable_drop'))){
                 if (event.type === 'drop') {
-
                     var id_drag = $(this).attr('id');
                     var data = event.originalEvent.dataTransfer.getData('Text', id_drag);
                     var dataList = $(event.target).parent().find('.creneau_element').map(function() {
-                        return $(this).data("mail");
+                        return $(this).data('mail');
                     }).get();
 
-                    if(dataList.indexOf($($('#' + data).children('div')[0]).data("mail")) != -1){
-                        alert("L'\351tudiant a d\351j\340 une soutenance \340 cet horaire.");
-                    }else if(dataList.indexOf($($('#' + data).children('div')[1]).data("mail")) != -1){
-                        alert("Le professeur a d\351j\340 une soutenance \340 cet horaire.");
-                    }else if (dataList.indexOf($($('#' + data).children('div')[2]).data("mail")) != -1 ){
-                        alert("Le co-jury a d\351j\340 une soutenance \340 cet horaire.");
-                    }else{
+                    var targetParentNode = event.target.parentNode;
 
+                    //On compare la ligne cible avec la ligne source, pour vérifier si c'est la même
+                    if(targetParentNode !== $scope.currentTarget) {
+                        var studentMail = $($('#' + data).children('div')[0]).data('mail');
+                        var teacherMail = $($('#' + data).children('div')[1]).data('mail');
+                        var companyMail = $($('#' + data).children('div')[2]).data('mail');
+
+                        if(dataList.indexOf(studentMail) != -1) {
+                            alert("L'\351tudiant a d\351j\340 une soutenance \340 cet horaire.");
+                        } else if(dataList.indexOf(teacherMail) != -1) {
+                            alert("Le professeur a d\351j\340 une soutenance \340 cet horaire.");
+                        } else if (dataList.indexOf(companyMail) != -1 ) {
+                            alert("Le co-jury a d\351j\340 une soutenance \340 cet horaire.");
+                        } else {
+                            if ($(this).find('div').length === 0) {
+                                de = $('#' + data).detach();
+                                de.appendTo($(this));
+                            }
+
+                            $scope.modified[data] = {
+                                "room": event.target.cellIndex,
+                                "periode": $('#' + data).parent().parent()[0].firstElementChild.getAttribute('data-periode'),
+                                "horaire": $('#' + data).parent().parent()[0].firstElementChild.innerHTML
+                            };
+                        }
+                    } else {
                         if ($(this).find('div').length === 0) {
                             de = $('#' + data).detach();
                             de.appendTo($(this));
                         }
+
                         $scope.modified[data] = {
                             "room": event.target.cellIndex,
                             "periode": $('#' + data).parent().parent()[0].firstElementChild.getAttribute('data-periode'),
                             "horaire": $('#' + data).parent().parent()[0].firstElementChild.innerHTML
                         };
                     }
+                } //fin if
+            } //fin if
 
-                }//fin if
-            }//fin if
             if (event.type === 'drop') {
                 $('.unavailable_drop_design').each(function () {
                     $(this).removeClass('unavailable_drop_design');
                 });
             }
-
         });
     };
 
