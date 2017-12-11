@@ -70,10 +70,8 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
                 return;
             }
 
-            $http.get(backendURL + 'planning/' + id + '/validate').success(function(data) {
+            $http.get(backendURL + 'planning/' + id + '/validate').success(function() {
 				document.location.href = fileURL;
-
-                $route.reload();
 			})
 			.error(function(data) {
 				console.log(data);

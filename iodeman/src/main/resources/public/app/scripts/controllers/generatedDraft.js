@@ -90,7 +90,7 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
                             }
                             html += '<div  class="rec_tut creneau_element creneau_draft" data-mail="'+horaire[current_soutenance].student.tuteur.name+'"><p>'
                             + capit(horaire[current_soutenance].student.tuteur.name, true)
-                            + '</p></div>'
+                            + '</p></div>';
 
 
                             html += '</div>';
@@ -130,16 +130,21 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
                     $('[data-periode= '+key+']').parent().children('td').addClass("unavailable_drop_design unavailable_drop");
                 });
             }
-
         });
+
         $('table td').on("dragenter dragover drop", function (event) {
             event.preventDefault();
 
-            if(!($(event.target).hasClass('unavailable_drop'))){
+            $log.debug("test1");
+
+            if(!($(event.target).hasClass('unavailable_drop'))) {
                 if (event.type === 'drop') {
+                    $log.debug("test2");
+
                     var id_drag = $(this).attr('id');
                     var data = event.originalEvent.dataTransfer.getData('Text', id_drag);
                     var dataList = $(event.target).parent().find('.creneau_element').map(function() {
+                        $log.debug("test3");
                         return $(this).data('mail');
                     }).get();
 
@@ -147,6 +152,8 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
 
                     //On compare la ligne cible avec la ligne source, pour vérifier si c'est la même
                     if(targetParentNode !== $scope.currentTarget) {
+                        $log.debug("test4");
+
                         var studentMail = $($('#' + data).children('div')[0]).data('mail');
                         var teacherMail = $($('#' + data).children('div')[1]).data('mail');
                         var companyMail = $($('#' + data).children('div')[2]).data('mail');
@@ -158,6 +165,8 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
                         } else if (dataList.indexOf(companyMail) != -1 ) {
                             alert("Le co-jury a d\351j\340 une soutenance \340 cet horaire.");
                         } else {
+                            $log.debug("test5");
+
                             if ($(this).find('div').length === 0) {
                                 de = $('#' + data).detach();
                                 de.appendTo($(this));
@@ -170,6 +179,8 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
                             };
                         }
                     } else {
+                        $log.debug("Test6");
+
                         if ($(this).find('div').length === 0) {
                             de = $('#' + data).detach();
                             de.appendTo($(this));

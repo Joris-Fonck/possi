@@ -136,7 +136,7 @@ public class PlanningExportBuilder {
 		HSSFSheet planningSheet = workbook.createSheet("Planning");
 
 		HSSFFont font = workbook.createFont();
-		font.setFontHeight((short)(13*20));
+		font.setFontHeight((short)(13 * 20));
 
 		planningSheet.setDefaultRowHeightInPoints((short) (font.getFontHeightInPoints() + 4));
 
@@ -447,13 +447,10 @@ public class PlanningExportBuilder {
 		footer.setRight( "Page " + HeaderFooter.page() + " sur " + HeaderFooter.numPages() );
 		footer.setCenter(planning.getCsv_file());
 
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Date now = new Date();
-		String csvName = planning.getCsv_file();
-		String[] split = planning.getCsv_file().split("\\.csv");
-		if(split.length > 0) { csvName = split[0]; }
-		File f = new File(planning.getName()+"_"+csvName+"_"+sdf.format(now)+".xls");
+
+		File f = new File(planning.getName()+"_"+sdf.format(now)+".xls");
 		FileOutputStream stream = new FileOutputStream(f);
 		workbook.write(stream);
 		stream.close();
