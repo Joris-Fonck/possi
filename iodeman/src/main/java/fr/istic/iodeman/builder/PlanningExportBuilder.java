@@ -96,7 +96,6 @@ public class PlanningExportBuilder {
 	}
 
 	public File toXls() throws Exception {
-
 		Validate.notNull(timeboxes);
 		Validate.notNull(participants);
 		algoPlanning_new.deserialize(planning.getId());
@@ -359,7 +358,7 @@ public class PlanningExportBuilder {
 			cellIndex=0;
 			row = planningSheet.createRow(rowIndex++);
 			rowCount++;
-			row.setHeightInPoints(planningSheet.getDefaultRowHeightInPoints());
+			row.setHeightInPoints(2 * planningSheet.getDefaultRowHeightInPoints());
 			// Horaire
 			(cell = row.createCell(cellIndex++)).setCellValue(emptyDay.get(cpt).getHoraire());
 			cell.setCellStyle(defaultStyle);
