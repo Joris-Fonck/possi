@@ -25,7 +25,7 @@ angular.module('publicApp', [
 ])
 
 .constant("backendURL", "http://localhost:8080/")
-.constant("backendURL2", "http://possi.istic.univ-rennes1.fr:8080/")
+.constant("backendURL2", "http://possi-test.istic.univ-rennes1.fr:8080/")
 
 .config(function ($routeProvider, $locationProvider) {
     $routeProvider

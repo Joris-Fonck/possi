@@ -447,7 +447,7 @@ public class PlanningExportBuilder {
 		footer.setRight( "Page " + HeaderFooter.page() + " sur " + HeaderFooter.numPages() );
 		footer.setCenter(planning.getCsv_file());
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date now = new Date();
 
 		File f = new File(planning.getName()+"_"+sdf.format(now)+".xls");
