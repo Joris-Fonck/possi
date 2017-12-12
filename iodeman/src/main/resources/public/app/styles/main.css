@@ -45,9 +45,9 @@ body {
 /* Custom section */
 
 
-.paragraph{
+.paragraph {
     text-align: center;
-    font-size: 20px;
+    font-size: 15px;
     font-family: "Arial";
     font-style: normal;
 }
@@ -62,10 +62,15 @@ img.resize {
 
 div.bandeau {
     background: #FAF7F5;
-    padding-top: 56px;
-    padding-bottom: 56px;
 }
 
+img.number {
+    width: 25px;
+}
+
+h3.ccm_h3 {
+    font-size: 18px;
+}
 
 /* Custom page footer */
 .footer {
