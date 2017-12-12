@@ -145,9 +145,7 @@ angular.module('publicApp').controller('ParticipantCtrl', function ($scope, $loc
                         };
                     });
                 });
-            }
-
-            else {
+            } else {
                 $http.get(backendURL + 'unavailability/agenda/' + $scope.id + '/' + participant.student.person.uid).success(function (data) {
                     console.log("agenda found!");
                     console.log(data);

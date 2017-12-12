@@ -116,6 +116,26 @@
             </div>
         </div>
     </div>
+    <div class="row bandeau paragraph" ng-if="user.role == 'PROF'">
+        <div class="col-md-12 col-sm-12">
+            <h1 class="center">Comment cela fonctionne ?</h1>
+        <div class="col-md-4">
+            <img class="resize" src="app/images/calendar.png">
+            <h3 class="center">Donnez un nom à votre planning</h3>
+            <p>Trouvez un nom, selectionnez les dates, des salles, importez des participants.</p>
+        </div>
+        <div class="col-md-4">
+            <img class="resize" src="app/images/settings.png">
+            <h3 class="center">Exportez-le planning !</h3>
+            <p>Modifiez-le si besoin, ajoutez les indisponibilités et enfin générez-le.</p>
+        </div>
+        <div class="col-md-4">
+            <img class="resize" src="app/images/draft.png">
+            <h3 class="center">Corrigez-le si besoin</h3>
+            <p>Vous pouvez effectuer des modifications avec la fonctionnalité draft.</p>
+        </div>
+        </div>
+    </div>
 </div>
 
 <div ng-show="!connected" class="row">
