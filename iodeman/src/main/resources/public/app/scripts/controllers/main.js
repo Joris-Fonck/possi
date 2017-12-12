@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the publicApp
  */
-angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope, $http, $log, backendURL, Auth, $sessionStorage) {
+angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope, $http, $log, backendURL, $route) {
 	$.material.init();
 
     $scope.dtOptions = {
@@ -32,11 +32,8 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
 
 	$http.get(backendURL + 'planning/list').success(function(data) {
 		$scope.plannings = data;
-		$scope.connected = true;
 
 		$("#home-spinner").remove();
-	}).error(function() {
-        $scope.connected = false;
 	});
 
 	$scope.closeHomeInfo = function() {
@@ -73,14 +70,12 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
                 return;
             }
 
-            $http.get(backendURL + 'planning/' + id + '/validate')
-                .success(function(data) {
-                    console.log(data);
-                    document.location.href = fileURL;
-                })
-                .error(function(data) {
-                    console.log(data);
-                });
+            $http.get(backendURL + 'planning/' + id + '/validate').success(function() {
+				document.location.href = fileURL;
+			})
+			.error(function(data) {
+				console.log(data);
+			});
         });
     };
 });

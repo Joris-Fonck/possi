@@ -96,7 +96,6 @@ public class PlanningExportBuilder {
 	}
 
 	public File toXls() throws Exception {
-
 		Validate.notNull(timeboxes);
 		Validate.notNull(participants);
 		algoPlanning_new.deserialize(planning.getId());
@@ -136,7 +135,7 @@ public class PlanningExportBuilder {
 		HSSFSheet planningSheet = workbook.createSheet("Planning");
 
 		HSSFFont font = workbook.createFont();
-		font.setFontHeight((short)(13*20));
+		font.setFontHeight((short)(13 * 20));
 
 		planningSheet.setDefaultRowHeightInPoints((short) (font.getFontHeightInPoints() + 4));
 
@@ -284,7 +283,7 @@ public class PlanningExportBuilder {
 						cell.setCellStyle(defaultStyle);
 						CellUtil.setAlignment(cell, HorizontalAlignment.CENTER);
 
-						(cell = row.createCell(cellIndex++)).setCellValue("Enseignant \"suiveur\"");
+						(cell = row.createCell(cellIndex++)).setCellValue("Enseignant référent");
 						cell.setCellStyle(defaultStyle);
 						CellUtil.setAlignment(cell, HorizontalAlignment.CENTER);
 
@@ -359,7 +358,7 @@ public class PlanningExportBuilder {
 			cellIndex=0;
 			row = planningSheet.createRow(rowIndex++);
 			rowCount++;
-			row.setHeightInPoints(planningSheet.getDefaultRowHeightInPoints());
+			row.setHeightInPoints(2 * planningSheet.getDefaultRowHeightInPoints());
 			// Horaire
 			(cell = row.createCell(cellIndex++)).setCellValue(emptyDay.get(cpt).getHoraire());
 			cell.setCellStyle(defaultStyle);
@@ -447,13 +446,10 @@ public class PlanningExportBuilder {
 		footer.setRight( "Page " + HeaderFooter.page() + " sur " + HeaderFooter.numPages() );
 		footer.setCenter(planning.getCsv_file());
 
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date now = new Date();
-		String csvName = planning.getCsv_file();
-		String[] split = planning.getCsv_file().split("\\.csv");
-		if(split.length > 0) { csvName = split[0]; }
-		File f = new File(planning.getName()+"_"+csvName+"_"+sdf.format(now)+".xls");
+
+		File f = new File(planning.getName()+"_"+sdf.format(now)+".xls");
 		FileOutputStream stream = new FileOutputStream(f);
 		workbook.write(stream);
 		stream.close();

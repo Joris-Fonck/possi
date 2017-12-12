@@ -346,8 +346,7 @@ public class PlanningServiceImpl implements PlanningService {
 	}
 
 	@Override
-	public File exportExcel(Planning planning) {		
-		
+	public File exportExcel(Planning planning) {
 		// verify the planning is not null
 		Validate.notNull(planning);
 		
@@ -363,7 +362,7 @@ public class PlanningServiceImpl implements PlanningService {
 //			file = builder.split().build().toCSV();
 			file = builder.split().build().toXls();
 		} catch (Exception e) {
-			System.out.println("Erreur de l'exportation lors de la fonction exportExcel: "+e.getMessage());
+			System.out.println("Erreur de l'exportation lors de la fonction exportExcel: " + e.getMessage());
 			e.printStackTrace();
 		}
 		

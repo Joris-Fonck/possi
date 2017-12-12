@@ -56,24 +56,23 @@ public class FileDownloadController {
 		// name of the returned file
 		String filename = "planning_export.xls";
 		if(file != null){
-			filename = file.getName();
+		    filename = file.getName();
 		}
 		
 		// header
         String headerKey = "Content-Disposition";
-        String headerValue = String.format("attachment; filename=\"%s\"",
-        		filename);
+        String headerValue = String.format("attachment; filename=\"%s\"", filename);
         response.setHeader(headerKey, headerValue);
 
 		// BEGIN write the file
 		FileInputStream in = new FileInputStream(file);
 		OutputStream out = response.getOutputStream();
 
-		byte[] buffer= new byte[8192]; 
+		byte[] buffer = new byte[8192];
 		int length = 0;
 
 		while ((length = in.read(buffer)) > 0){
-		     out.write(buffer, 0, length);
+			out.write(buffer, 0, length);
 		}
 		in.close();
 		out.close();
