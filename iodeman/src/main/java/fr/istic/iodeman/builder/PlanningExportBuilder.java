@@ -283,7 +283,7 @@ public class PlanningExportBuilder {
 						cell.setCellStyle(defaultStyle);
 						CellUtil.setAlignment(cell, HorizontalAlignment.CENTER);
 
-						(cell = row.createCell(cellIndex++)).setCellValue("Enseignant \"suiveur\"");
+						(cell = row.createCell(cellIndex++)).setCellValue("Enseignant référent");
 						cell.setCellStyle(defaultStyle);
 						CellUtil.setAlignment(cell, HorizontalAlignment.CENTER);
 
