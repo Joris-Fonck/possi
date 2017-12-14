@@ -49,7 +49,7 @@ angular.module('publicApp').controller('ParticipantCtrl', function ($scope, $loc
     $http.get(backendURL + 'planning/' + $scope.id + '/participants/unavailabilities')
         .success(function(data) {
             $scope.participants = data;
-                console.log("Hello", $scope.participants);
+
             if($scope.participants.length > 0) {
                 $scope.showImportButton = false;
 
@@ -147,8 +147,6 @@ angular.module('publicApp').controller('ParticipantCtrl', function ($scope, $loc
                 });
             } else {
                 $http.get(backendURL + 'unavailability/agenda/' + $scope.id + '/' + participant.student.person.uid).success(function (data) {
-                    console.log("agenda found!");
-                    console.log(data);
                     $("#unavailibities-spinner").remove();
                     $scope.agenda = data;
                     $scope.columns = data.map(function(l) {

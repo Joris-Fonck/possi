@@ -60,7 +60,9 @@
                         <td>{{ planning.period.from | date:'dd/MM/yyyy' }}</td>
                         <td>{{ planning.period.to | date:'dd/MM/yyyy' }}</td>
                         <td>
-                            <a data-toggle="tooltip" title="Indisponibilités" id="btn-indispo" href="#/unavailabilities/{{ planning.id }}"
+                            <a data-toggle="tooltip" title="Indisponibilités" id="btn-indispo"
+                               href="#/planning/{{ planning.id }}/unavailabilities"
+                               ng-show="planning.admin.uid == user.uid"
                                class="btn btn-raised btn-sm btn-success hidden-xs">
                                 Saisir indisponibilités
                             </a>
@@ -90,13 +92,13 @@
                                ng-show="exported.indexOf(planning.id) != -1 && planning.admin.uid == user.uid"
                                href="#/duplicatePlanning/{{ planning.id }}"
                                class="btn btn-raised btn-sm btn-info hidden-xs">
-                                <i class="fa fa-plus" aria-hidden="true"></i>&nbsp;Draft
+                                <i class="fa fa-plus" aria-hidden="true"></i>Draft
                             </a>
                             <a data-toggle="tooltip" title="Gérer mes drafts"
                                ng-show="exported.indexOf(planning.id) != -1 && planning.admin.uid == user.uid"
                                href="#/planning/draft/{{ planning.id }}"
                                class="btn btn-raised btn-sm btn-info hidden-xs">
-                                <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;Draft
+                                <i class="fa fa-wrench" aria-hidden="true"></i>Draft
                             </a>
                             <a data-toggle="tooltip" title="Supprimer le planning"
                                confirmed-click="remove({{ planning.id }})"

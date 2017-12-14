@@ -79,7 +79,7 @@ angular.module('publicApp', [
             controller: 'GeneratedDraftCtrl',
             controllerAs: 'generatedDraftCtrl'
         })
-        .when('/unavailabilities/:idPlanning', {
+        .when('/planning/:idPlanning/unavailabilities', {
             templateUrl: 'app/views/unavailabilities.html',
             controller: 'UnavailabilitiesCtrl',
             controllerAs: 'unavailabilitiesCtrl'
