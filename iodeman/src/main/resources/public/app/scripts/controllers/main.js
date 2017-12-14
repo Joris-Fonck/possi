@@ -33,7 +33,9 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
 	$http.get(backendURL + 'planning/list').success(function(data) {
 		$scope.plannings = data;
 
-		$("#home-spinner").remove();
+        $("#home-spinner").remove();
+	}).error(function() {
+        $("#home-spinner").remove();
 	});
 
 	$scope.closeHomeInfo = function() {

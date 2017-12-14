@@ -42,6 +42,35 @@ body {
 .back_arrow > h1 > a > button {
     color: white !important;
 }
+/* Custom section */
+
+
+.paragraph {
+    text-align: center;
+    font-size: 15px;
+    font-family: "Arial";
+    font-style: normal;
+}
+
+img.resize {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    height: auto;
+}
+
+div.bandeau {
+    background: #FAF7F5;
+}
+
+img.number {
+    width: 25px;
+}
+
+h3.ccm_h3 {
+    font-size: 18px;
+}
 
 /* Custom page footer */
 .footer {
