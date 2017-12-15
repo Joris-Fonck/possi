@@ -24,8 +24,7 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
         $scope.csv_file = data.csv_file;
         $scope.i = 0;
         $scope.fillTable($scope.creneaux);
-    })
-    .error(function () {
+    }).error(function () {
         $scope.error = true;
     });
 
@@ -116,6 +115,9 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
             var dt = event.originalEvent.dataTransfer;
             dt.setData('Text', $(this).attr('id'));
             $scope.origin_position = $(this).parent('td')[0];
+
+            $log.debug($scope.creneaux);
+
             var periodes = $scope.creneaux.indispos[$(this).attr("data-student")];
 
             $scope.currentTarget = event.currentTarget.parentNode.parentNode;

@@ -139,6 +139,10 @@ public class UnavailabilityDAOImpl extends AbstractHibernateDAO implements Unava
 		prof.add(Restrictions.eq("email",  creneau.getEnseignant().getName()));
 		Person p = (Person) prof.uniqueResult();
 
+		Criteria candide = session.createCriteria(Person.class);
+		candide.add(Restrictions.eq("email",  creneau.getCandide().getName()));
+		Person c = (Person) candide.uniqueResult();
+
 		Criteria criteria = session.createCriteria(Unavailability.class);
 
 		criteria.setProjection(Projections.property("period.from"));
@@ -146,7 +150,8 @@ public class UnavailabilityDAOImpl extends AbstractHibernateDAO implements Unava
 		criteria.add(Restrictions.eq("planning.id",planning_ref_Id));
 		criteria.add(Restrictions.or(
 						Restrictions.eq("person.id", s.getId()),
-						Restrictions.eq("person.id", p.getId())
+						Restrictions.eq("person.id", p.getId()),
+						Restrictions.eq("person.id", c.getId())
 				));
 		criteria.setProjection(Projections.groupProperty("period.from"));
 
