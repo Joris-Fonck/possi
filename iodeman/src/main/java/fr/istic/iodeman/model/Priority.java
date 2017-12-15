@@ -15,14 +15,14 @@ public class Priority {
 	private String role;
 
 	private Integer weight;
-	
+
 	public Priority() {
-		
+
 	}
 	
 	public Priority(String role, Integer weight) {
 		this.role = role;
-		setWeight(weight);
+		this.weight = weight;
 	}
 	
 	public Integer getId() {

@@ -51,6 +51,8 @@ angular.module('publicApp').controller('MainCtrl', function ($scope, $rootScope,
 			    	$scope.plannings.splice(i, 1);
 			    }
 			}
+		}).error(function(data) {
+			$log.debug("Slice error : ", data);
 		});
 	}
 

@@ -11,24 +11,23 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
 
     $scope.origin_position = null;
 
-    $http.get(backendURL + 'planning/' + $scope.id + '/exportDraft')
-        .success(function (data) {
-            const ordered = {};
+    $http.get(backendURL + 'planning/' + $scope.id + '/exportDraft').success(function (data) {
+        var ordered = {};
 
-            Object.keys(data.creneaux).sort().forEach(function (key) {
-                ordered[key] = data.creneaux[key];
-            });
-
-            data.creneaux = ordered;
-            $scope.creneaux = data;
-            $scope.name = data.name;
-            $scope.csv_file = data.csv_file;
-            $scope.i = 0;
-            $scope.fillTable($scope.creneaux);
-        })
-        .error(function () {
-            $scope.error = true;
+        Object.keys(data.creneaux).sort().forEach(function (key) {
+            ordered[key] = data.creneaux[key];
         });
+
+        data.creneaux = ordered;
+        $scope.creneaux = data;
+        $scope.name = data.name;
+        $scope.csv_file = data.csv_file;
+        $scope.i = 0;
+        $scope.fillTable($scope.creneaux);
+    })
+    .error(function () {
+        $scope.error = true;
+    });
 
     function sortByKey(array, key) {
         return array.sort(function (a, b) {
@@ -75,23 +74,22 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
                         if(typeof horaire[current_soutenance] != 'undefined' && typeof horaire[current_soutenance].student != 'undefined' && horaire[current_soutenance].salle == salle_num+1){
                             html += '<div class="event creneau" draggable="true" id="' + div_id + '" data-student="'+horaire[current_soutenance].student.name+'">';
 
-
                             html += '<div class="rec_etud creneau_element creneau_draft" data-mail="'+horaire[current_soutenance].student.name+'"><p>'
                                 + capit(etn(horaire[current_soutenance].student.name), true)
                                 + '</p></div>'
                                 + '<div  class="rec_prof1 creneau_element creneau_draft" data-mail="'+horaire[current_soutenance].student.enseignant.name+'"><p>'
                                 + capit(etn(horaire[current_soutenance].student.enseignant.name), true)
                                 + '</p></div>';
-                            if(typeof horaire[current_soutenance].candide != "undefined"){
 
+                            if(typeof horaire[current_soutenance].candide != "undefined") {
                                 html += '<div  class="rec_prof2 creneau_element creneau_draft" data-mail="'+horaire[current_soutenance].candide.name+'"><p>'
                                     + capit(etn(horaire[current_soutenance].candide.name), true)
                                     + '</p></div>';
                             }
+
                             html += '<div  class="rec_tut creneau_element creneau_draft" data-mail="'+horaire[current_soutenance].student.tuteur.name+'"><p>'
                             + capit(horaire[current_soutenance].student.tuteur.name, true)
                             + '</p></div>';
-
 
                             html += '</div>';
                             $scope.cache[div_id] = horaire[current_soutenance];
@@ -108,6 +106,7 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
                     html += '</tr>';
                 }
             });
+
             table.append(html);
         });
     }
@@ -158,8 +157,6 @@ angular.module('publicApp').controller('GeneratedDraftCtrl', function ($scope, $
                         } else if (dataList.indexOf(companyMail) != -1 ) {
                             alert("Le co-jury a d\351j\340 une soutenance \340 cet horaire.");
                         } else {
-                            $log.debug("test5");
-
                             if ($(this).find('div').length === 0) {
                                 de = $('#' + data).detach();
                                 de.appendTo($(this));

@@ -162,13 +162,12 @@ public class FileDownloadController {
 		List<TimeBox> timeboxes = splitter.execute(planning);
 		Map<Long, Integer> dico = new HashMap<>();
 
-		for (int d = 0; d< timeboxes.size(); d++) {
+		for (int d = 0; d < timeboxes.size(); d++) {
 			dico.put(timeboxes.get(d).getFrom().getTime(), d);
 		}
 
 		for(Map.Entry<Long, Integer> entry : dico.entrySet()) {
 			System.out.println(entry.getKey() + "---------" + entry.getValue());
-			// traitements
 		}
 		
 		JSONObject ret = new JSONObject();
@@ -189,11 +188,10 @@ public class FileDownloadController {
 		Map<String, List<Integer>> unav = new HashMap<>();
 
 		for(int i = 0; i < creneaux.size(); i++) {
-
 			//recherche indispo
 			//ajout a l'objet creneaux les periodes
 				//obj.put(""+i, creneaux.get(i));
-			if(creneaux.get(i).size() == 0){
+			if(creneaux.get(i).size() == 0) {
 				//Creation d'un créneaux vide pour l'affichage
 				TimeBox timebox = timeboxes.get(i);
 				Creneau new_creneau = new Creneau(i,null,null,null,null);

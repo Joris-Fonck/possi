@@ -1,6 +1,5 @@
 package fr.istic.iodeman.builder;
 
-
 import com.google.common.collect.Lists;
 import fr.istic.iodeman.model.*;
 import fr.istic.iodeman.strategy.*;

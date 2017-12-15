@@ -219,10 +219,9 @@ public class PlanningDAOImpl extends AbstractHibernateDAO implements PlanningDAO
 				"WHERE Planning_id = :id";
 
 		SQLQuery query_participant = session.createSQLQuery(sql_participant);
-		query_participant.setParameter("id", id);
 		query_participant.setParameter("newid", newId);
+		query_participant.setParameter("id", id);
 		query_participant.executeUpdate();
-
 
 		session.close();
 		return newId;

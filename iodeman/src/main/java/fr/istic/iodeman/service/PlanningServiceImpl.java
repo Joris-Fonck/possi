@@ -250,11 +250,9 @@ public class PlanningServiceImpl implements PlanningService {
 					InputStream f1 = new FileInputStream(PERSIST_PATH + "/" + idPlanning + "/planning.ser");
 					InputStream b1 = new BufferedInputStream(f1);
 					ObjectInput i1 = new ObjectInputStream (b1);
-					){
+				) {
 				//deserialize the List
 				planning = (Map<Integer, List<Creneau>>)i1.readObject();
-
-
 			}
 			catch(ClassNotFoundException ex){
 				System.err.println(ex);
@@ -269,7 +267,6 @@ public class PlanningServiceImpl implements PlanningService {
 
 	@Override
 	public Integer duplicate(Integer id) {
-
 		Integer newId = planningDAO.duplicate(id);
 
 		File dir = new File(PERSIST_PATH + "/" + id);

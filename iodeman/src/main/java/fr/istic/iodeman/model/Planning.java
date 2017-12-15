@@ -91,8 +91,6 @@ public class Planning{
 		this.admin = p.getAdmin();
 	}
 
-
-
 	public Integer getId() {
 		return id;
 	}
