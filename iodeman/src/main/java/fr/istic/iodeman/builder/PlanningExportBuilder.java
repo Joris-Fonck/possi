@@ -202,7 +202,7 @@ public class PlanningExportBuilder {
 					cellIndex=0;
 					row = planningSheet.createRow(rowIndex++);
 					rowCount++;
-					row.setHeightInPoints(planningSheet.getDefaultRowHeightInPoints());
+					row.setHeightInPoints(2 * planningSheet.getDefaultRowHeightInPoints());
 					// Horaire
 					(cell = row.createCell(cellIndex++)).setCellValue(emptyDay.get(cpt).getHoraire());
 					cell.setCellStyle(defaultStyle);
@@ -247,8 +247,8 @@ public class PlanningExportBuilder {
 							cellIndex=0;
 							row = planningSheet.createRow(rowIndex++);
 							rowCount++;
-							row.setHeightInPoints(planningSheet.getDefaultRowHeightInPoints());
-							// Horaire
+							row.setHeightInPoints(2 * planningSheet.getDefaultRowHeightInPoints());
+							// Horaires
 							(cell = row.createCell(cellIndex++)).setCellValue(emptyDay.get(cpt).getHoraire());
 							cell.setCellStyle(defaultStyle);
 							cpt++;
@@ -302,7 +302,7 @@ public class PlanningExportBuilder {
 						cellIndex=0;
 						row = planningSheet.createRow(rowIndex++);
 						rowCount++;
-						row.setHeightInPoints(planningSheet.getDefaultRowHeightInPoints());
+						row.setHeightInPoints(2 * planningSheet.getDefaultRowHeightInPoints());
 						// Horaire
 						(cell = row.createCell(cellIndex++)).setCellValue(emptyDay.get(cpt).getHoraire());
 						cell.setCellStyle(defaultStyle);
@@ -314,7 +314,7 @@ public class PlanningExportBuilder {
 					cellIndex=0;
 					row = planningSheet.createRow(rowIndex++);
 					rowCount += 2;
-					row.setHeightInPoints(2*planningSheet.getDefaultRowHeightInPoints());
+					row.setHeightInPoints(2 * planningSheet.getDefaultRowHeightInPoints());
 
 					// Horaire
 					(cell = row.createCell(cellIndex++)).setCellValue(c.getHoraire());
